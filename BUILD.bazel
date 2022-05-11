@@ -1,0 +1,28 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "WORKSPACE",
+        "//golangci-lint:all_files",
+        "//staticcheck:all_files",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+# gazelle:prefix github.com/sluongng/nogo-analyzer
+gazelle(name = "gazelle")
+
+# Note: this introduces wrong load statement in staticcheck/deps.bzl
+# TODO: fix this so that running it does not cause problem.
+gazelle(
+    name = "update-staticcheck-deps",
+    args = [
+        "-from_file=staticcheck/go.mod",
+        "-to_macro=staticcheck/deps.bzl%staticcheck_deps",
+        "-prune",
+    ],
+    command = "update-repos",
+)

@@ -1,0 +1,49 @@
+# gazelle:ignore
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//staticcheck:def.bzl", "ANALYZERS")
+
+exports_files([
+    "def.bzl",
+    "deps.bzl",
+])
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]) + [
+        "//staticcheck/cmd:all_files",
+        "//staticcheck/tests:all_files",
+        "//staticcheck/util:all_files",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+[
+    go_library(
+        name = analyzer,
+        srcs = ["analyzer.go"],
+        importpath = "github.com/sluongng/nogo-analyzer/staticcheck/" + analyzer,
+        visibility = ["//visibility:public"],
+        x_defs = {"name": analyzer},
+        deps = ["//staticcheck/util"],
+    )
+    for analyzer in ANALYZERS
+]
+
+[
+    go_test(
+        name = analyzer + "_test",
+        size = "small",
+        srcs = ["analyzer_test.go"],
+        embed = [analyzer],
+        # Only compatible with platforms which have sandbox execution support.
+        # For more information see https://github.com/bazelbuild/rules_go/issues/3144
+        target_compatible_with = select({
+            "@platforms//os:osx": [],
+            "@platforms//os:linux": [],
+            "//conditions:default": ["@platforms//:incompatible"],
+        }),
+    )
+    for analyzer in ANALYZERS
+]

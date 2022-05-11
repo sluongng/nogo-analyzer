@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "util",
+    srcs = ["util.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/staticcheck/util",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@co_honnef_go_tools//analysis/lint:go_default_library",
+        "@co_honnef_go_tools//quickfix:go_default_library",
+        "@co_honnef_go_tools//simple:go_default_library",
+        "@co_honnef_go_tools//staticcheck:go_default_library",
+        "@co_honnef_go_tools//stylecheck:go_default_library",
+        "@org_golang_x_tools//go/analysis:go_default_library",
+    ],
+)

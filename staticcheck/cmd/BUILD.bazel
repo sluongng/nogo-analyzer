@@ -1,0 +1,9 @@
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]) + [
+        "//staticcheck/cmd/gen_config:all_files",
+        "//staticcheck/cmd/list_analyzers:all_files",
+    ],
+    visibility = ["//visibility:public"],
+)

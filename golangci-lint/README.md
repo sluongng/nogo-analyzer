@@ -1,0 +1,3 @@
+# golangci-lint analyzers
+
+WIP

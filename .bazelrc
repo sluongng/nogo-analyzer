@@ -1,0 +1,33 @@
+# System configs
+build --java_runtime_version=remotejdk_11
+build --tool_java_runtime_version=remotejdk_11
+
+# Output configs
+build --show_timestamps
+build --test_output=errors
+build --ui_event_filters=-DEBUG
+test --test_verbose_timeout_warnings
+# test --test_summary=terse
+
+# Build configs
+build --incompatible_strict_action_env
+## Needed these for integration tests (bazel in bazel)
+build --test_env=PATH=/opt/homebrew/bin/:/usr/local/bin:/usr/sbin:/bin:/usr/bin
+build --test_env=HOME=~/
+
+# Test configs
+test --test_size_filters=small
+test:all --test_size_filters=
+
+# Remote cache configs
+build --bes_results_url=https://app.buildbuddy.io/invocation/
+build --bes_backend=grpcs://remote.buildbuddy.io
+build --remote_cache=grpcs://remote.buildbuddy.io
+build --remote_timeout=3600
+
+# build --experimental_remote_cache_async
+build --experimental_remote_merkle_tree_cache
+build --experimental_remote_merkle_tree_cache_size=10000
+
+# Personal override (and creds)
+try-import .user.bazelrc
