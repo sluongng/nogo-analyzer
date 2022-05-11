@@ -21,4 +21,4 @@ http_archive(
 And follow instructions in specific README file of each analyzer collections:
 
 1. [staticcheck](./staticcheck/README.md)
-1. [golangci-lint](./golangci/README.md)
+1. [golangci-lint](./golangci-lint/README.md)
