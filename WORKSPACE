@@ -38,3 +38,25 @@ go_register_toolchains(version = "1.18")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
+
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "",
+    strip_prefix = "protobuf-3.20.1",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/v3.20.1.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+http_archive(
+    name = "com_github_bazelbuild_buildtools",
+    sha256 = "",
+    strip_prefix = "buildtools-5.1.0",
+    urls = [
+        "https://github.com/bazelbuild/buildtools/archive/refs/tags/5.1.0.tar.gz",
+    ],
+)

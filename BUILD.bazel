@@ -1,4 +1,5 @@
 load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 filegroup(
     name = "all_files",
@@ -13,6 +14,7 @@ filegroup(
 )
 
 # gazelle:prefix github.com/sluongng/nogo-analyzer
+# gazelle:exclude staticcheck/tests
 gazelle(name = "gazelle")
 
 # Note: this introduces wrong load statement in staticcheck/deps.bzl
@@ -25,4 +27,8 @@ gazelle(
         "-prune",
     ],
     command = "update-repos",
+)
+
+buildifier(
+    name = "buildifier",
 )
