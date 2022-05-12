@@ -1,5 +1,7 @@
 # System configs
+build --java_language_version=11
 build --java_runtime_version=remotejdk_11
+build --tool_java_language_version=11
 build --tool_java_runtime_version=remotejdk_11
 
 # Output configs
@@ -20,14 +22,20 @@ test --test_size_filters=small
 test:all --test_size_filters=
 
 # Remote cache configs
-build --bes_results_url=https://app.buildbuddy.io/invocation/
-build --bes_backend=grpcs://remote.buildbuddy.io
-build --remote_cache=grpcs://remote.buildbuddy.io
-build --remote_timeout=3600
-
-# build --experimental_remote_cache_async
+build --experimental_remote_cache_async
+build --experimental_remote_cache_compression
 build --experimental_remote_merkle_tree_cache
 build --experimental_remote_merkle_tree_cache_size=10000
 
+build:remote-cache --bes_results_url=https://app.buildbuddy.io/invocation/
+build:remote-cache --bes_backend=grpcs://remote.buildbuddy.io
+build:remote-cache --remote_cache=grpcs://remote.buildbuddy.io
+build:remote-cache --remote_timeout=3600
+
 # Personal override (and creds)
 try-import .user.bazelrc
+
+## Sample .user.bazelrc ##
+#
+# build --config=remote-cache
+# build --remote_header=x-buildbuddy-api-key=<api-key>
