@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "util",
+    srcs = ["util.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/util",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//golangci-lint/constructor:constructor_lib",
+        "@org_golang_x_tools//go/analysis",
+    ],
+)

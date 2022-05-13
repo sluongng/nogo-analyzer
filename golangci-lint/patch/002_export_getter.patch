@@ -1,0 +1,85 @@
+From 645d61e6888cdea9215d9d66b2d08e6c09ac9df3 Mon Sep 17 00:00:00 2001
+From: Son Luong Ngoc <sluongng@gmail.com>
+Date: Fri, 1 Apr 2022 16:13:06 +0700
+Subject: [PATCH] runAnalyzersConfig: export analyzers
+
+In order to use golangci-lint in non-trivial use cases, such as Bazel's
+rules_go's 'nogo' static analysis framework, we would need to make the
+analysis.Analyzer defined for various different golinters be reuseable
+outside of golangci-lint.
+
+Export the GetAnalyzers function of runAnalyzersConfig interface as well
+as adjusting the 2 implementations of that interface: goanalysis.Linter
+and goanalysis.MetaLinter
+
+This should help enable other packages to be able to consumer
+golangci-lint analyzers for different use cases.
+---
+ pkg/golinters/goanalysis/linter.go     | 2 +-
+ pkg/golinters/goanalysis/metalinter.go | 2 +-
+ pkg/golinters/goanalysis/runners.go    | 8 ++++----
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/pkg/golinters/goanalysis/linter.go b/pkg/golinters/goanalysis/linter.go
+index ef49e4284a..fa1991417e 100644
+--- a/pkg/golinters/goanalysis/linter.go
++++ b/pkg/golinters/goanalysis/linter.go
+@@ -168,7 +168,7 @@ func (lnt *Linter) getLinterNameForDiagnostic(*Diagnostic) string {
+ 	return lnt.name
+ }
+ 
+-func (lnt *Linter) getAnalyzers() []*analysis.Analyzer {
++func (lnt *Linter) GetAnalyzers() []*analysis.Analyzer {
+ 	return lnt.analyzers
+ }
+ 
+diff --git a/pkg/golinters/goanalysis/metalinter.go b/pkg/golinters/goanalysis/metalinter.go
+index 5c24d10964..f6bf1153e3 100644
+--- a/pkg/golinters/goanalysis/metalinter.go
++++ b/pkg/golinters/goanalysis/metalinter.go
+@@ -49,7 +49,7 @@ func (ml MetaLinter) getLoadMode() LoadMode {
+ 	return loadMode
+ }
+ 
+-func (ml MetaLinter) getAnalyzers() []*analysis.Analyzer {
++func (ml MetaLinter) GetAnalyzers() []*analysis.Analyzer {
+ 	var allAnalyzers []*analysis.Analyzer
+ 	for _, l := range ml.linters {
+ 		allAnalyzers = append(allAnalyzers, l.analyzers...)
+diff --git a/pkg/golinters/goanalysis/runners.go b/pkg/golinters/goanalysis/runners.go
+index 7e4cf902e7..366f3fd084 100644
+--- a/pkg/golinters/goanalysis/runners.go
++++ b/pkg/golinters/goanalysis/runners.go
+@@ -21,7 +21,7 @@ import (
+ type runAnalyzersConfig interface {
+ 	getName() string
+ 	getLinterNameForDiagnostic(*Diagnostic) string
+-	getAnalyzers() []*analysis.Analyzer
++	GetAnalyzers() []*analysis.Analyzer
+ 	useOriginalPackages() bool
+ 	reportIssues(*linter.Context) []Issue
+ 	getLoadMode() LoadMode
+@@ -41,7 +41,7 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
+ 		pkgs = lintCtx.OriginalPackages
+ 	}
+ 
+-	issues, pkgsFromCache := loadIssuesFromCache(pkgs, lintCtx, cfg.getAnalyzers())
++	issues, pkgsFromCache := loadIssuesFromCache(pkgs, lintCtx, cfg.GetAnalyzers())
+ 	var pkgsToAnalyze []*packages.Package
+ 	for _, pkg := range pkgs {
+ 		if !pkgsFromCache[pkg] {
+@@ -49,13 +49,13 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
+ 		}
+ 	}
+ 
+-	diags, errs, passToPkg := runner.run(cfg.getAnalyzers(), pkgsToAnalyze)
++	diags, errs, passToPkg := runner.run(cfg.GetAnalyzers(), pkgsToAnalyze)
+ 
+ 	defer func() {
+ 		if len(errs) == 0 {
+ 			// If we try to save to cache even if we have compilation errors
+ 			// we won't see them on repeated runs.
+-			saveIssuesToCache(pkgs, pkgsFromCache, issues, lintCtx, cfg.getAnalyzers())
++			saveIssuesToCache(pkgs, pkgsFromCache, issues, lintCtx, cfg.GetAnalyzers())
+ 		}
+ 	}()

@@ -1,6 +1,53 @@
+# gazelle:ignore
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//golangci-lint:def.bzl", "ANALYZERS")
+
+exports_files([
+    "def.bzl",
+    "deps.bzl",
+])
+
 filegroup(
     name = "all_files",
     testonly = True,
-    srcs = glob(["**"]),
+    srcs = glob(["**"]) + [
+        "//golangci-lint/cmd:all_files",
+        "//golangci-lint/constructor:all_files",
+        "//golangci-lint/patch:all_files",
+        "//golangci-lint/tests:all_files",
+        "//golangci-lint/util:all_files",
+    ],
     visibility = ["//visibility:public"],
 )
+
+[
+    go_library(
+        name = analyzer,
+        srcs = ["analyzer.go"],
+        importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/" + analyzer,
+        visibility = ["//visibility:public"],
+        x_defs = {"name": analyzer},
+        deps = ["//golangci-lint/util"],
+    )
+    for analyzer in ANALYZERS
+]
+
+[
+    go_test(
+        name = analyzer + "_test",
+        size = "small",
+        srcs = ["analyzer_test.go"],
+        embed = [analyzer],
+        tags = [
+            "exclusive",
+        ],
+        # Only compatible with platforms which have sandbox execution support.
+        # For more information see https://github.com/bazelbuild/rules_go/issues/3144
+        target_compatible_with = select({
+            "@platforms//os:osx": [],
+            "@platforms//os:linux": [],
+            "//conditions:default": ["@platforms//:incompatible"],
+        }),
+    )
+    for analyzer in ANALYZERS
+]

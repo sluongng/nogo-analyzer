@@ -45,6 +45,13 @@ load("//staticcheck:deps.bzl", "staticcheck_deps")
 
 staticcheck_deps()
 
+# Must be loaded before rules_go_deps and gazelle_deps
+#
+# gazelle:repository_macro golangci-lint/deps.bzl%golangci_lint_deps
+load("//golangci-lint:deps.bzl", "golangci_lint_deps")
+
+golangci_lint_deps()
+
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 go_rules_dependencies()

@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "constructor",
+    outs = [
+        "constructor.go",
+    ],
+    cmd = " ".join([
+        "$(location //golangci-lint/cmd/extract-func)",
+        "$$(dirname $(locations @com_github_golangci_golangci_lint//pkg/golinters:all_go_files) | sort | uniq | head -1)",
+        "> $@",
+    ]),
+    executable = True,
+    tools = [
+        "//golangci-lint/cmd/extract-func",
+        "@com_github_golangci_golangci_lint//pkg/golinters:all_go_files",
+    ],
+)
+
+go_library(
+    name = "constructor_lib",
+    srcs = [
+        "constructor.go",  #keep
+        "placeholder.go",
+    ],
+    importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/constructor",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_golangci_golangci_lint//pkg/golinters",
+        "@com_github_golangci_golangci_lint//pkg/golinters/goanalysis",
+    ],
+)

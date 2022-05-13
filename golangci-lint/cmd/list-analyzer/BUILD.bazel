@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "list-analyzer_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/cmd/list-analyzer",
+    visibility = ["//visibility:private"],
+    deps = ["//golangci-lint/util"],
+)
+
+go_binary(
+    name = "list-analyzer",
+    embed = [":list-analyzer_lib"],
+    visibility = ["//visibility:public"],
+)

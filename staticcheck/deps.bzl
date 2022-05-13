@@ -29,8 +29,8 @@ def staticcheck_deps():
     go_repository(
         name = "com_github_burntsushi_toml",
         importpath = "github.com/BurntSushi/toml",
-        sum = "h1:GaI7EiDXDRfa8VshkTj7Fym7ha+y8/XxIgD2okUIjLw=",
-        version = "v0.4.1",
+        sum = "h1:ksErzDEI1khOiGPgpwuI7x2ebx/uXQNw7xJpn9Eq1+I=",
+        version = "v1.1.0",
     )
 
     go_repository(
@@ -43,8 +43,8 @@ def staticcheck_deps():
     go_repository(
         name = "org_golang_x_crypto",
         importpath = "golang.org/x/crypto",
-        sum = "h1:7I4JAnoQBe7ZtJcBaYHi5UtiO8tQHbUSXxL+pnGRANg=",
-        version = "v0.0.0-20210921155107-089bfa567519",
+        sum = "h1:kUhD7nTDoI3fVd9G4ORWrbV5NY0liEs/Jg2pv5f+bBA=",
+        version = "v0.0.0-20220411220226-7b82a4e95df4",
     )
 
     go_repository(
@@ -65,8 +65,8 @@ def staticcheck_deps():
     go_repository(
         name = "org_golang_x_net",
         importpath = "golang.org/x/net",
-        sum = "h1:OfiFi4JbukWwe3lzw+xunroH1mnC1e2Gy5cxNJApiSY=",
-        version = "v0.0.0-20211015210444-4f30a5c0130f",
+        sum = "h1:bRb386wvrE+oBNdF1d/Xh9mQrfQ4ecYhW5qJ5GvTGT4=",
+        version = "v0.0.0-20220412020605-290c469a71a5",
     )
 
     go_repository(
@@ -79,8 +79,8 @@ def staticcheck_deps():
     go_repository(
         name = "org_golang_x_sys",
         importpath = "golang.org/x/sys",
-        sum = "h1:id054HUawV2/6IGm2IV8KZQjqtwAOo2CYlOToYqa0d0=",
-        version = "v0.0.0-20211019181941-9d821ace8654",
+        sum = "h1:xHms4gcpe1YE7A3yIllJXP16CMAGuqwO2lX1mTyyRRc=",
+        version = "v0.0.0-20220422013727-9388b58f7150",
     )
 
     go_repository(
@@ -100,6 +100,6 @@ def staticcheck_deps():
     go_repository(
         name = "org_golang_x_xerrors",
         importpath = "golang.org/x/xerrors",
-        sum = "h1:go1bK/D/BFZV2I8cIQd1NKEZ+0owSTG1fDTci4IqFcE=",
-        version = "v0.0.0-20200804184101-5ec99f83aff1",
+        sum = "h1:GGU+dLjvlC3qDwqYgL6UgRmHXhOOgns0bZu2Ty5mm6U=",
+        version = "v0.0.0-20220411194840-2f41105eb62f",
     )

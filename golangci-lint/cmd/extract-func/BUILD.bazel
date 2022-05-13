@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "extract-func_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/cmd/extract-func",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "extract-func",
+    embed = [":extract-func_lib"],
+    visibility = ["//visibility:public"],
+)

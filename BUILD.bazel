@@ -29,6 +29,24 @@ gazelle(
     command = "update-repos",
 )
 
+# Note: this introduces wrong load statement in staticcheck/deps.bzl
+# TODO: fix this so that running it does not cause problem.
+gazelle(
+    name = "update-golangci-lint-deps",
+    args = [
+        "-from_file=golangci-lint/go.mod",
+        "-to_macro=golangci-lint/deps.bzl%golangci_lint_deps",
+        "-build_external=external",
+        "-prune",
+    ],
+    command = "update-repos",
+)
+
+alias(
+    name = "goworksync",
+    actual = "//tool:goworksync",
+)
+
 buildifier(
     name = "buildifier",
 )
