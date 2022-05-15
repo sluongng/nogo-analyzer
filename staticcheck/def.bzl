@@ -2,7 +2,7 @@
 #
 # Generate this list by running:
 #
-#   > bazel run //go/analyzer/staticcheck/cmd/list_analyzers
+#   > bazel run //staticcheck/cmd/list_analyzers
 #
 ANALYZERS = [
     "QF1001",
