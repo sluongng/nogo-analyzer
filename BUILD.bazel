@@ -44,7 +44,7 @@ gazelle(
 
 alias(
     name = "goworksync",
-    actual = "//tool:goworksync",
+    actual = "//tools:goworksync",
 )
 
 buildifier(
