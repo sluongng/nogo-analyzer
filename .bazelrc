@@ -14,8 +14,11 @@ test --test_verbose_timeout_warnings
 # Build configs
 build --incompatible_strict_action_env
 ## Needed these for integration tests (bazel in bazel)
-build --test_env=PATH=/opt/homebrew/bin/:/usr/local/bin:/usr/sbin:/bin:/usr/bin
-build --test_env=HOME=~/
+test --test_env=PATH=/opt/homebrew/bin/:/usr/local/bin:/usr/sbin:/bin:/usr/bin:/go/bin
+test --test_env=HOME=~/
+## golangci-lint analyzers depends on go-ruleguard which requires GOROOT to be
+## set so that it can load dynamic libraries.
+test --test_env=GOROOT
 
 # Test configs
 test --test_size_filters=small
