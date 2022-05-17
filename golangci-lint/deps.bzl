@@ -53,8 +53,8 @@ def _golangci_lint_deps():
         name = "co_honnef_go_tools",
         build_external = "external",
         importpath = "honnef.co/go/tools",
-        sum = "h1:1kJlrWJLkaGXgcaeosRXViwviqjI7nkBvU2+sZW0AYc=",
-        version = "v0.3.1",
+        sum = "h1:ytYb4rOqyp1TSa2EPvNVwtPQJctSELKaMyLfqNP4+34=",
+        version = "v0.3.2",
     )
     go_repository(
         name = "com_4d63_gochecknoglobals",
@@ -2747,10 +2747,9 @@ def _golangci_lint_deps():
         name = "org_golang_x_mod",
         build_external = "external",
         importpath = "golang.org/x/mod",
-        sum = "h1:kQgndtyPBW/JIYERgdxfwMYh3AVStj88WQTlNDi2a+o=",
-        version = "v0.6.0-dev.0.20220106191415-9b9b3d81d5e3",
+        sum = "h1:6zppjxzCulZykYSLyVDYbneBfbaBIQPYMevg0bEwv2s=",
+        version = "v0.6.0-dev.0.20220419223038-86c51ed26bb4",
     )
-
     go_repository(
         name = "org_golang_x_net",
         build_external = "external",
@@ -2804,8 +2803,8 @@ def _golangci_lint_deps():
         name = "org_golang_x_tools",
         build_external = "external",
         importpath = "golang.org/x/tools",
-        sum = "h1:ofrrl6c6NG5/IOSx/R1cyiQxxjqlur0h/TvbUhkH0II=",
-        version = "v0.1.11-0.20220316014157-77aa08bb151a",
+        sum = "h1:OKYpQQVE3DKSc3r3zHVzq46vq5YH7x8xpR3/k9ixmUg=",
+        version = "v0.1.11-0.20220513221640-090b14e8501f",
     )
     go_repository(
         name = "org_golang_x_xerrors",
