@@ -35,7 +35,7 @@ gazelle(
     name = "update-golangci-lint-deps",
     args = [
         "-from_file=golangci-lint/go.mod",
-        "-to_macro=golangci-lint/deps.bzl%golangci_lint_deps",
+        "-to_macro=golangci-lint/deps.bzl%_golangci_lint_deps",
         "-build_external=external",
         "-prune",
     ],
