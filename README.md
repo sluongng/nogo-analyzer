@@ -1,8 +1,19 @@
-# nogo analyzer
+# nogo-analyzer
 
-A collection of Go popular static analyzers which is meant to be used with Bazel's rules_go's `nogo` static analysis framework.
+A collection of Go popular static analyzers. 
 
-Aimed to be easy to use and consume.
+Designed to be used with Bazel rules_go's `nogo` static analysis framework.
+Aimed to be easy to use and customize.
+
+
+## Project Status
+
+1. [staticcheck](./staticcheck/README.md): Stable and ready to be used
+
+1. [golangci-lint](./golangci-lint/README.md): POC-only. Should not be used except for research purposes.
+
+1. [goci-lint](./goci-lint/README.md): An attempt to skim down `golangci-lint` to make it more suitable while using with `nogo`
+
 
 ## How to use
 
@@ -18,7 +29,4 @@ http_archive(
 )
 ```
 
-And follow instructions in specific README file of each analyzer collections:
-
-1. [staticcheck](./staticcheck/README.md)
-1. [golangci-lint](./golangci-lint/README.md)
+And follow instructions in specific README file of each analyzer collections.

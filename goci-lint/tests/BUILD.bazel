@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_bazel_test(
+    name = "tests",
+    size = "small",
+    srcs = ["goci_lint_test.go"],
+    rule_files = [
+        "@com_github_sluongng_nogo_analyzer//:all_files",
+        "@io_bazel_rules_go//:all_files",
+        "@bazel_gazelle//:all_files",
+    ],
+)

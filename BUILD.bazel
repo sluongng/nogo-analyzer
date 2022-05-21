@@ -7,6 +7,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "WORKSPACE",
+        "//goci-lint:all_files",
         "//golangci-lint:all_files",
         "//staticcheck:all_files",
     ],
@@ -15,6 +16,8 @@ filegroup(
 
 # gazelle:prefix github.com/sluongng/nogo-analyzer
 # gazelle:exclude staticcheck/tests
+# gazelle:exclude goci-lint/tests
+# gazelle:exclude golangci-lint/tests
 gazelle(name = "gazelle")
 
 # Note: this introduces wrong load statement in staticcheck/deps.bzl

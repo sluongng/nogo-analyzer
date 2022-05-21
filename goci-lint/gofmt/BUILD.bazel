@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "gofmt_lib",
+    srcs = ["analyzer.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/goci-lint/gofmt",
+    visibility = ["//visibility:public"],  #keep
+    deps = [
+        "@com_github_golangci_gofmt//gofmt:go_default_library",
+        "@org_golang_x_tools//go/analysis",
+    ],
+)

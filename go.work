@@ -1,6 +1,7 @@
 go 1.18
 
 use (
+	./goci-lint/gofmt
 	./golangci-lint
 	./staticcheck
 )
