@@ -1,6 +1,6 @@
 module github.com/sluongng/nogo-analyzer/staticcheck
 
-go 1.17
+go 1.18
 
 require (
 	github.com/bazelbuild/rules_go v0.32.0
