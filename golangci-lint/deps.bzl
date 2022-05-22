@@ -1290,8 +1290,8 @@ def _golangci_lint_deps():
         name = "com_github_kisielk_errcheck",
         build_external = "external",
         importpath = "github.com/kisielk/errcheck",
-        sum = "h1:YTDO4pNy7AUN/021p+JGHycQyYNIyMoenM1YDVK6RlY=",
-        version = "v1.6.0",
+        sum = "h1:cErYo+J4SmEjdXZrVXGwLJCE2sB06s23LpkcyWNrT+s=",
+        version = "v1.6.1",
     )
     go_repository(
         name = "com_github_kisielk_gotool",
