@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "ineffassign",
+    srcs = ["analyzer.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/goci-lint/ineffassign",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_gordonklaus_ineffassign//pkg/ineffassign:go_default_library"],
+)

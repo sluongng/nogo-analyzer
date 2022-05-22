@@ -3,6 +3,7 @@ filegroup(
     testonly = True,
     srcs = glob(["**"]) + [
         "//goci-lint/errcheck:all_files",
+        "//goci-lint/ineffassign:all_files",
         "//goci-lint/gofmt:all_files",
         "//goci-lint/tests:all_files",
     ],
