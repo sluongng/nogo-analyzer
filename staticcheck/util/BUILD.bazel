@@ -18,6 +18,7 @@ go_library(
         "@co_honnef_go_tools//simple",
         "@co_honnef_go_tools//staticcheck",
         "@co_honnef_go_tools//stylecheck",
+        "@co_honnef_go_tools//unused",
         "@org_golang_x_tools//go/analysis",
     ],
 )

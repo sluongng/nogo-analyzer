@@ -9,6 +9,7 @@ import (
 	"honnef.co/go/tools/simple"
 	"honnef.co/go/tools/staticcheck"
 	"honnef.co/go/tools/stylecheck"
+	"honnef.co/go/tools/unused"
 )
 
 var Analyzers = func() map[string]*analysis.Analyzer {
@@ -19,6 +20,7 @@ var Analyzers = func() map[string]*analysis.Analyzer {
 		simple.Analyzers,
 		staticcheck.Analyzers,
 		stylecheck.Analyzers,
+		{unused.Analyzer},
 	} {
 		for _, a := range analyzers {
 			resMap[a.Analyzer.Name] = a.Analyzer

@@ -160,6 +160,7 @@ ANALYZERS = [
     "ST1021",
     "ST1022",
     "ST1023",
+    "U1000",
 ]
 
 def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_analyzer//staticcheck"):
