@@ -6,7 +6,7 @@ build --tool_java_runtime_version=remotejdk_11
 
 # Output configs
 build --show_timestamps
-build --ui_event_filters=-DEBUG,-INFO
+build --ui_event_filters=-DEBUG
 test --test_output=errors
 test --test_verbose_timeout_warnings
 # test --test_summary=terse
