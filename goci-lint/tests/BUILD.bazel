@@ -8,9 +8,9 @@ filegroup(
 )
 
 go_bazel_test(
-    name = "tests",
+    name = "gofmt",
     size = "small",
-    srcs = ["goci_lint_test.go"],
+    srcs = ["gofmt_test.go"],
     rule_files = [
         "@com_github_sluongng_nogo_analyzer//:all_files",
         "@io_bazel_rules_go//:all_files",

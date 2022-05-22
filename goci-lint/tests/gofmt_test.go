@@ -15,12 +15,11 @@ func TestMain(m *testing.M) {
 		Main: `
 -- BUILD.bazel --
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
-load("@com_github_sluongng_nogo_analyzer//golangci-lint:def.bzl", "golangci_lint_analyzers")
 
 nogo(
     name = "nogo",
 		deps = [
-			"@com_github_sluongng_nogo_analyzer//goci-lint/gofmt:gofmt_lib",
+			"@com_github_sluongng_nogo_analyzer//goci-lint/gofmt",
 		],
     visibility = ["//visibility:public"],
 )
@@ -54,15 +53,11 @@ golangci_lint_deps()
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
-
-# load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-# 
-# protobuf_deps()
 `,
 	})
 }
 
-func Test(t *testing.T) {
+func TestGofmt(t *testing.T) {
 	for _, test := range []struct {
 		desc, nogo, target string
 		wantSuccess        bool
