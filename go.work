@@ -1,7 +1,9 @@
 go 1.18
 
 use (
+	./goci-lint/errcheck
 	./goci-lint/gofmt
+	./goci-lint/tests
 	./golangci-lint
 	./staticcheck
 )
