@@ -19,31 +19,49 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
 nogo(
     name = "nogo",
 		deps = [
-			"@com_github_sluongng_nogo_analyzer//goci-lint/gofmt",
+			"@com_github_sluongng_nogo_analyzer//goci-lint/errcheck",
 		],
     visibility = ["//visibility:public"],
 )
 
 go_library(
-    name = "gofmt_fail",
-    srcs = ["gofmt_fail.go"],
-    importpath = "gofmt/fail",
+    name = "errcheck_fail",
+    srcs = ["errcheck_fail.go"],
+    importpath = "errcheck/fail",
 )
 
 go_library(
-    name = "gofmt_ok",
-    srcs = ["gofmt_ok.go"],
-    importpath = "gofmt/ok",
+    name = "errcheck_ok",
+    srcs = ["errcheck_ok.go"],
+    importpath = "errcheck/ok",
 )
 
--- gofmt_fail.go --
+-- errcheck_fail.go --
 package fail
 
-func foo( ) {}
--- gofmt_ok.go --
+import "fmt"
+
+func foo() error {
+	return fmt.Errorf("blah")
+}
+
+func bar() {
+	foo()
+}
+-- errcheck_ok.go --
 package ok
 
-func foo() {}
+import "fmt"
+
+func foo() error {
+	return fmt.Errorf("blah")
+}
+
+func bar() {
+	if err := foo(); err != nil {
+		// Do something
+	}
+}
 `,
 		WorkspaceSuffix: `
 load("@com_github_sluongng_nogo_analyzer//golangci-lint:deps.bzl",  "golangci_lint_deps")
@@ -57,7 +75,7 @@ gazelle_dependencies()
 	})
 }
 
-func TestGofmt(t *testing.T) {
+func TestErrcheck(t *testing.T) {
 	for _, test := range []struct {
 		desc, nogo, target string
 		wantSuccess        bool
@@ -66,22 +84,22 @@ func TestGofmt(t *testing.T) {
 		{
 			desc:        "nogo disable, no lint run",
 			nogo:        "",
-			target:      "//:gofmt_fail",
+			target:      "//:errcheck_fail",
 			wantSuccess: true,
 		},
 		{
 			desc:        "nogo enable, lint ok",
 			nogo:        "@//:nogo",
-			target:      "//:gofmt_ok",
+			target:      "//:errcheck_ok",
 			wantSuccess: true,
 		},
 		{
 			desc:        "nogo enable, lint fail",
 			nogo:        "@//:nogo",
-			target:      "//:gofmt_fail",
+			target:      "//:errcheck_fail",
 			wantSuccess: false,
 			includes: []string{
-				"gofmt",
+				"errcheck",
 			},
 		},
 	} {

@@ -17,3 +17,14 @@ go_bazel_test(
         "@bazel_gazelle//:all_files",
     ],
 )
+
+go_bazel_test(
+    name = "errcheck",
+    size = "small",
+    srcs = ["errcheck_test.go"],
+    rule_files = [
+        "@com_github_sluongng_nogo_analyzer//:all_files",
+        "@io_bazel_rules_go//:all_files",
+        "@bazel_gazelle//:all_files",
+    ],
+)
