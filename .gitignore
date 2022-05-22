@@ -1,2 +1,4 @@
 /bazel-*
 /.user.bazelrc
+
+/go.work.sum
