@@ -10,9 +10,9 @@ Aimed to be easy to use and customize.
 
 1. [staticcheck](./staticcheck/README.md): Stable and ready to be used
 
-1. [golangci-lint](./golangci-lint/README.md): POC-only. Should not be used except for research purposes.
+1. [golangci-lint](./golangci-lint/README.md): POC-only. Should NOT be used except for research purposes.
 
-1. [goci-lint](./goci-lint/README.md): An attempt to skim down `golangci-lint` to make it more suitable while using with `nogo`
+1. [goci-lint](./goci-lint/README.md): An attempt to skim down `golangci-lint` to make it more suitable while using with `nogo`. (WIP)
 
 
 ## How to use
@@ -22,9 +22,9 @@ Add this into your WORKSPACE project
 ```
 http_archive(
     name = "com_github_sluongng_nogo_analyzer",
-    sha256 = "<replace-with-release-sha>",
+    sha256 = "ab9ab7936b6d490ff92bb8e3e03bc3ace3406f0b4d1625cc0720d0e9e81a369a",
     urls = [
-        "https://github.com/sluongng/nogo-analyzer/releases/download/<release-tag>/nogo-analyzer-<release-tag>.zip",
+        "https://github.com/sluongng/nogo-analyzer/archive/refs/tags/v0.0.1.tar.gz",
     ],
 )
 ```
