@@ -1,12 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-load("@bazel_gazelle//:deps.bzl", _go_repository = "go_repository")
-
-def go_repository(**kwargs):
-    maybe(
-        _go_repository,
-        **kwargs
-    )
+load("@com_github_sluongng_nogo_analyzer//private:def.bzl", go_repository = "maybe_go_repository")
 
 def golangci_lint_deps():
     maybe(

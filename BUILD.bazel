@@ -9,7 +9,9 @@ filegroup(
         "WORKSPACE",
         "//goci-lint:all_files",
         "//golangci-lint:all_files",
+        "//private:all_files",
         "//staticcheck:all_files",
+        "//tools:all_files",
     ],
     visibility = ["//visibility:public"],
 )

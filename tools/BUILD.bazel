@@ -1,3 +1,10 @@
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
 sh_binary(
     name = "goworksync",
     srcs = ["goworksync.sh"],
