@@ -1,6 +1,7 @@
 # gazelle:ignore
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-load("//golangci-lint:def.bzl", "ANALYZERS")
+load("//golangci-lint:def.bzl", "ANALYZERS", "golangci_lint_analyzers")
+load("//private:deps_test.bzl", "prune_ext_deps")
 
 exports_files([
     "def.bzl",
@@ -48,3 +49,9 @@ filegroup(
     )
     for analyzer in ANALYZERS
 ]
+
+prune_ext_deps(
+    name = "prune_deps",
+    deps_file = "//golangci-lint:deps.bzl",
+    targets = golangci_lint_analyzers(ANALYZERS, "//golangci-lint"),
+)

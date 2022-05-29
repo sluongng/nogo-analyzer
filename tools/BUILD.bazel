@@ -18,34 +18,3 @@ sh_binary(
     ],
     visibility = ["//visibility:public"],
 )
-
-staticcheck_analyzer_set = "set({})".format(" ".join(staticcheck_analyzers(ANALYZERS, "//staticcheck")))
-
-# Query for external go_library that staticcheck analyzers depends on
-genquery(
-    name = "staticcheck_deps",
-    expression = """
-        kind(
-            go_library,
-            deps(
-                {}
-            )
-        )
-    """.format(staticcheck_analyzer_set),
-    scope = staticcheck_analyzers(ANALYZERS),
-)
-
-# Filter for unique list of external repositories
-genrule(
-    name = "staticcheck_ext_deps",
-    outs = [
-        "staticcheck_ext_deps.txt",
-    ],
-    cmd = """
-        grep '^@' $(location :staticcheck_deps) |
-            sed 's|//.*||' |
-            sort |
-            uniq > $@
-    """,
-    tools = [":staticcheck_deps"],
-)
