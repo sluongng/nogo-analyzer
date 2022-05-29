@@ -2,6 +2,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("//staticcheck:def.bzl", "ANALYZERS", "staticcheck_analyzers")
 load("//private:deps_test.bzl", "prune_ext_deps")
+load("//private:gen_deps.bzl", "generate_deps")
 
 exports_files([
     "def.bzl",
@@ -52,4 +53,10 @@ prune_ext_deps(
     name = "prune_deps",
     deps_file = "//staticcheck:deps.bzl",
     targets = staticcheck_analyzers(ANALYZERS, "//staticcheck"),
+)
+
+generate_deps(
+    name = "staticcheck",
+    mod_file = ":go.mod",
+    sum_file = ":go.sum",
 )

@@ -10,7 +10,7 @@ filegroup(
 [
     go_bazel_test(
         name = i,
-        size = "small",
+        size = "medium",
         srcs = [i + "_test.go"],
         rule_files = [
             "@com_github_sluongng_nogo_analyzer//:all_files",
