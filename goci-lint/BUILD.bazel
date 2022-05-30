@@ -1,11 +1,12 @@
 filegroup(
     name = "all_files",
     testonly = True,
-    srcs = glob(["**"]) + [
+    srcs = [
+        "BUILD.bazel",
+        "README.md",
         "//goci-lint/errcheck:all_files",
-        "//goci-lint/ineffassign:all_files",
         "//goci-lint/gofmt:all_files",
-        "//goci-lint/tests:all_files",
+        "//goci-lint/ineffassign:all_files",
     ],
     visibility = ["//visibility:public"],
 )

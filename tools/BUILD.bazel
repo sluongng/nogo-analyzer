@@ -1,12 +1,5 @@
 load("//staticcheck:def.bzl", "ANALYZERS", "staticcheck_analyzers")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 sh_binary(
     name = "goworksync",
     srcs = ["goworksync.sh"],
@@ -15,6 +8,16 @@ sh_binary(
     ],
     data = [
         "@go_sdk//:bin/go",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "goworksync.sh",
     ],
     visibility = ["//visibility:public"],
 )

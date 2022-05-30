@@ -3,6 +3,10 @@ exports_files(glob(["*.patch"]))
 filegroup(
     name = "all_files",
     testonly = True,
-    srcs = glob(["**"]),
+    srcs = [
+        "001_export_source.patch",
+        "002_export_getter.patch",
+        "BUILD.bazel",
+    ],
     visibility = ["//visibility:public"],
 )

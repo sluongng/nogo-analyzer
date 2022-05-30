@@ -34,7 +34,7 @@ def generate_deps(
             export GOROOT="$$(readlink $(execpath :go_bin))/../../"
 
             # Run gazelle
-            $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name}_deps -prune
+            $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name} -prune
 
             # Replace default load line with ours
             echo 'load("@com_github_sluongng_nogo_analyzer//private:def.bzl", go_repository = "maybe_go_repository")' > $@

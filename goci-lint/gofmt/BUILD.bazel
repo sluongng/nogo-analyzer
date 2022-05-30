@@ -1,13 +1,6 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 load("//private:gen_deps.bzl", "generate_deps")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 go_library(
     name = "gofmt",
     srcs = ["analyzer.go"],
@@ -20,7 +13,19 @@ go_library(
 )
 
 generate_deps(
-    name = "gofmt",
+    name = "gofmt_deps",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "analyzer.go",
+        "go.mod",
+        "go.sum",
+    ],
+    visibility = ["//visibility:public"],
 )

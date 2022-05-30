@@ -1,7 +1,8 @@
 filegroup(
     name = "all_files",
     testonly = True,
-    srcs = glob(["**"]) + [
+    srcs = [
+        "BUILD.bazel",
         "//golangci-lint/cmd/extract-func:all_files",
         "//golangci-lint/cmd/list-analyzer:all_files",
     ],

@@ -1,12 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 genrule(
     name = "constructor",
     outs = [
@@ -36,4 +29,14 @@ go_library(
         "@com_github_golangci_golangci_lint//pkg/golinters",
         "@com_github_golangci_golangci_lint//pkg/golinters/goanalysis",
     ],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "placeholder.go",
+    ],
+    visibility = ["//visibility:public"],
 )

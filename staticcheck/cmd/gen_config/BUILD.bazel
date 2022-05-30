@@ -1,12 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 go_library(
     name = "gen_config_lib",
     srcs = ["main.go"],
@@ -18,5 +11,15 @@ go_library(
 go_binary(
     name = "gen_config",
     embed = [":gen_config_lib"],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "main.go",
+    ],
     visibility = ["//visibility:public"],
 )

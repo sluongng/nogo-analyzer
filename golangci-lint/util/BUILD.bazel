@@ -1,12 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 go_library(
     name = "util",
     srcs = ["util.go"],
@@ -16,4 +9,14 @@ go_library(
         "//golangci-lint/constructor:constructor_lib",
         "@org_golang_x_tools//go/analysis",
     ],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "util.go",
+    ],
+    visibility = ["//visibility:public"],
 )
