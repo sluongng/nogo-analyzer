@@ -32,9 +32,6 @@ gazelle_binary(
 )
 
 # gazelle:prefix github.com/sluongng/nogo-analyzer
-# gazelle:exclude staticcheck/tests
-# gazelle:exclude goci-lint/tests
-# gazelle:exclude golangci-lint/tests
 gazelle(
     name = "gazelle",
     gazelle = "gazelle_binary",

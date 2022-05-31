@@ -1,11 +1,6 @@
 load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
+# gazelle:lang test_filegroup
 
 [
     go_bazel_test(
@@ -24,3 +19,17 @@ filegroup(
         "ineffassign",
     ]
 ]
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "errcheck_test.go",
+        "go.mod",
+        "go.sum",
+        "gofmt_test.go",
+        "ineffassign_test.go",
+    ],
+    visibility = ["//visibility:public"],
+)

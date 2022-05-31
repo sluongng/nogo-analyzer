@@ -1,5 +1,7 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
+# gazelle:lang test_filegroup,go
+
 go_library(
     name = "util",
     srcs = ["util.go"],

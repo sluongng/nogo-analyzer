@@ -1,4 +1,3 @@
-# gazelle:ignore
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("//golangci-lint:def.bzl", "ANALYZERS", "golangci_lint_analyzers")
 load("//private:deps_test.bzl", "prune_ext_deps")
@@ -8,19 +7,6 @@ exports_files([
     "def.bzl",
     "deps.bzl",
 ])
-
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]) + [
-        "//golangci-lint/cmd:all_files",
-        "//golangci-lint/constructor:all_files",
-        "//golangci-lint/patch:all_files",
-        "//golangci-lint/tests:all_files",
-        "//golangci-lint/util:all_files",
-    ],
-    visibility = ["//visibility:public"],
-)
 
 [
     go_library(
@@ -61,4 +47,27 @@ prune_ext_deps(
     name = "prune_deps",
     deps_file = "//golangci-lint:deps.bzl",
     targets = golangci_lint_analyzers(ANALYZERS, "//golangci-lint"),
+)
+
+# gazelle:lang test_filegroup
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "README.md",
+        "analyzer.go",
+        "analyzer_test.go",
+        "def.bzl",
+        "deps.bzl",
+        "go.mod",
+        "go.sum",
+        "//golangci-lint/cmd:all_files",
+        "//golangci-lint/constructor:all_files",
+        "//golangci-lint/patch:all_files",
+        "//golangci-lint/tests:all_files",
+        "//golangci-lint/util:all_files",
+    ],
+    visibility = ["//visibility:public"],
 )

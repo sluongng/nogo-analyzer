@@ -1,12 +1,5 @@
 load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
 
-filegroup(
-    name = "all_files",
-    testonly = True,
-    srcs = glob(["**"]),
-    visibility = ["//visibility:public"],
-)
-
 go_bazel_test(
     name = "tests",
     size = "medium",
@@ -16,4 +9,14 @@ go_bazel_test(
         "@io_bazel_rules_go//:all_files",
         "@bazel_gazelle//:all_files",
     ],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "golangci_lint_test.go",
+    ],
+    visibility = ["//visibility:public"],
 )

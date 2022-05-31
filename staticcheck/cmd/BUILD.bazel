@@ -1,3 +1,5 @@
+# gazelle:lang test_filegroup,go
+
 filegroup(
     name = "all_files",
     testonly = True,
