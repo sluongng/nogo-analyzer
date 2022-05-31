@@ -21,6 +21,7 @@ filegroup(
         "//golangci-lint:all_files",
         "//private:all_files",
         "//staticcheck:all_files",
+        "//third-party:all_files",
         "//tools:all_files",
     ],
     visibility = ["//visibility:public"],
@@ -37,26 +38,11 @@ gazelle(
     gazelle = "gazelle_binary",
 )
 
-# Note: this introduces wrong load statement in staticcheck/deps.bzl
-# TODO: fix this so that running it does not cause problem.
 gazelle(
-    name = "update-staticcheck-deps",
+    name = "update-deps",
     args = [
-        "-from_file=staticcheck/go.mod",
-        "-to_macro=staticcheck/deps.bzl%staticcheck_deps",
-        "-prune",
-    ],
-    command = "update-repos",
-    gazelle = "gazelle_binary",
-)
-
-# Note: this introduces wrong load statement in staticcheck/deps.bzl
-# TODO: fix this so that running it does not cause problem.
-gazelle(
-    name = "update-golangci-lint-deps",
-    args = [
-        "-from_file=golangci-lint/go.mod",
-        "-to_macro=golangci-lint/deps.bzl%_golangci_lint_deps",
+        "-from_file=go.work",
+        "-to_macro=private/deps.bzl%nogo_analyzer_deps",
         "-build_external=external",
         "-prune",
     ],

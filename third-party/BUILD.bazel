@@ -1,0 +1,11 @@
+exports_files(glob(["*.patch"]))
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "gazelle-go-work.patch",
+    ],
+    visibility = ["//visibility:public"],
+)

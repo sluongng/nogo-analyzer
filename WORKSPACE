@@ -13,10 +13,13 @@ http_archive(
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "5982e5463f171da99e3bdaeff8c0f48283a7a5f396ec5282910b9e8a49c0dd7e",
+    patch_args = ["-p1"],
+    patches = [
+        "@com_github_sluongng_nogo_analyzer//third-party:gazelle-go-work.patch",
+    ],
+    strip_prefix = "bazel-gazelle-b81a7ba1d8cbab5b603c76e30333ea4b97df07d6",
     urls = [
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.25.0/bazel-gazelle-v0.25.0.tar.gz",
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.25.0/bazel-gazelle-v0.25.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/archive/b81a7ba1d8cbab5b603c76e30333ea4b97df07d6.zip",
     ],
 )
 
@@ -38,19 +41,10 @@ http_archive(
     ],
 )
 
-# Must be loaded before rules_go_deps and gazelle_deps
-#
-# gazelle:repository_macro staticcheck/deps.bzl%staticcheck_deps
-load("//staticcheck:deps.bzl", "staticcheck_deps")
+load("//private:deps.bzl", "nogo_analyzer_deps")
 
-staticcheck_deps()
-
-# Must be loaded before rules_go_deps and gazelle_deps
-#
-# gazelle:repository_macro golangci-lint/deps.bzl%golangci_lint_deps
-load("//golangci-lint:deps.bzl", "golangci_lint_deps")
-
-golangci_lint_deps()
+# gazelle:repository_macro private/deps.bzl%nogo_analyzer_deps
+nogo_analyzer_deps()
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
