@@ -14,10 +14,6 @@ def generate_deps(
 
     # We cannot use an un-exported file target directly from within genrule
     # so let's create an alias and use the alias instead.
-    native.alias(
-        name = "go_bin",
-        actual = "@go_sdk//:bin/go",
-    )
     native.genrule(
         name = name + "_gen_deps",
         outs = [
@@ -31,7 +27,7 @@ def generate_deps(
 
             # Gazelle depends on `go` binary to run various commands
             # to extract module informations.
-            export GOROOT="$$(readlink $(execpath :go_bin))/../../"
+            export GOROOT="$$(readlink $(execpath //:gobin))/../../"
 
             # Run gazelle
             $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name} -prune
@@ -46,7 +42,7 @@ def generate_deps(
             sum_file = sum_file,
         ),
         tools = [
-            ":go_bin",
+            "//:gobin",
             gazelle_bin,
             mod_file,
             sum_file,

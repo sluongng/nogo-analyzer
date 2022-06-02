@@ -4,10 +4,10 @@ sh_binary(
     name = "goworksync",
     srcs = ["goworksync.sh"],
     args = [
-        "$(location @go_sdk//:bin/go)",
+        "$(execpath //:gobin)",
     ],
     data = [
-        "@go_sdk//:bin/go",
+        "//:gobin",
     ],
     visibility = ["//visibility:public"],
 )

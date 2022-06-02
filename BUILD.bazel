@@ -55,6 +55,13 @@ alias(
     actual = "//tools:goworksync",
 )
 
+alias(
+    name = "gobin",
+    actual = "@go_sdk//:bin/go",
+    visibility = ["//visibility:public"],
+)
+
 buildifier(
     name = "buildifier",
+    visibility = ["//visibility:public"],
 )
