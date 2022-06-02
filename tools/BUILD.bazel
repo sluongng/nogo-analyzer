@@ -12,6 +12,20 @@ sh_binary(
     visibility = ["//visibility:public"],
 )
 
+sh_binary(
+    name = "prune-deps",
+    srcs = ["prune-deps.sh"],
+    args = [
+        "$(execpath //private/cmd/deps-prune)",
+        "private/deps.bzl",
+        "//...",
+    ],
+    data = [
+        "//private/cmd/deps-prune",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 filegroup(
     name = "all_files",
     testonly = True,

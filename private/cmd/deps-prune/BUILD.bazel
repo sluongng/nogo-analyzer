@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "deps-prune_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/private/cmd/deps-prune",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_bazelbuild_buildtools//build:go_default_library",
+        "@com_github_bazelbuild_buildtools//edit:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "deps-prune",
+    embed = [":deps-prune_lib"],
+    visibility = ["//visibility:public"],
+)
