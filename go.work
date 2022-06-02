@@ -6,5 +6,6 @@ use (
 	./goci-lint/ineffassign
 	./goci-lint/tests
 	./golangci-lint
+	./private
 	./staticcheck
 )
