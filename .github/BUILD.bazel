@@ -1,6 +1,9 @@
 filegroup(
     name = "all_files",
     testonly = True,
-    srcs = ["FUNDING.yml"],
+    srcs = [
+        "BUILD.bazel",
+        "FUNDING.yml",
+    ],
     visibility = ["//visibility:public"],
 )
