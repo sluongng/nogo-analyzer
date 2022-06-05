@@ -12,7 +12,7 @@ Aimed to be easy to use and customize.
 
 1. [golangci-lint](./golangci-lint/README.md): POC-only. Should NOT be used except for research purposes.
 
-1. [goci-lint](./goci-lint/README.md): An attempt to skim down `golangci-lint` to make it more suitable while using with `nogo`. (WIP)
+1. [goci-lint](./goci-lint/README.md): An attempt to skim down `golangci-lint` to make it more suitable while using with `nogo`.
 
 
 ## How to use

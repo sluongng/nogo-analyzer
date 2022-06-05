@@ -17,6 +17,7 @@ filegroup(
         "bazel-testlogs",
         "go.work",
         "go.work.sum",
+        "//.github:all_files",
         "//goci-lint:all_files",
         "//golangci-lint:all_files",
         "//private:all_files",
