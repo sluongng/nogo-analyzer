@@ -15,6 +15,7 @@ filegroup(
         "bazel-nogo-analyzer",
         "bazel-out",
         "bazel-testlogs",
+        "def.bzl",
         "go.work",
         "go.work.sum",
         "//.github:all_files",

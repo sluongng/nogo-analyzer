@@ -51,7 +51,7 @@ nogo(
 
 4. Setup json config file.
 
-User often do not want to run static analysis over external dependencies / packages by default.
-Therefore, we provide [sample_config_json.txt](./sample_config_json.txt) with all `external` packages excluded from `nogo` checks by default. This file is not meant to be consumed directly, but for convenience copy-pasting.
-
 Please refer to [nogo's documentation](https://github.com/bazelbuild/rules_go/blob/master/go/nogo.rst) for more information on how to setup json config file.
+
+In [def.bzl](../def.bzl) we provide a helper function that would help you generate the json config file programmatically
+using starlark.  The `external/` regex is excluded by default as that included all the external dependencies.
