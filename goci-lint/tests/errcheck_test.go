@@ -64,9 +64,9 @@ func bar() {
 }
 `,
 		WorkspaceSuffix: `
-load("@com_github_sluongng_nogo_analyzer//golangci-lint:deps.bzl",  "golangci_lint_deps")
+load("@com_github_sluongng_nogo_analyzer//goci-lint/errcheck:deps.bzl",  "errcheck_deps")
 
-golangci_lint_deps()
+errcheck_deps()
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 

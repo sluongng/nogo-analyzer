@@ -1,0 +1,9 @@
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "//private/cmd/deps-prune:all_files",
+    ],
+    visibility = ["//visibility:public"],
+)

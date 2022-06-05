@@ -46,9 +46,9 @@ package ok
 func foo() {}
 `,
 		WorkspaceSuffix: `
-load("@com_github_sluongng_nogo_analyzer//golangci-lint:deps.bzl",  "golangci_lint_deps")
+load("@com_github_sluongng_nogo_analyzer//goci-lint/gofmt:deps.bzl",  "gofmt_deps")
 
-golangci_lint_deps()
+gofmt_deps()
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 

@@ -6,13 +6,14 @@ go_library(
     srcs = ["analyzer.go"],
     importpath = "github.com/sluongng/nogo-analyzer/goci-lint/ineffassign",
     visibility = ["//visibility:public"],
-    deps = ["@com_github_gordonklaus_ineffassign//pkg/ineffassign:go_default_library"],
+    deps = ["@com_github_gordonklaus_ineffassign//pkg/ineffassign"],
 )
 
 generate_deps(
     name = "ineffassign_deps",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+    targets = ["//goci-lint/ineffassign"],
 )
 
 filegroup(
@@ -21,6 +22,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "analyzer.go",
+        "deps.bzl",
         "go.mod",
         "go.sum",
     ],

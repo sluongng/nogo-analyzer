@@ -5,7 +5,6 @@ load("//private:gen_deps.bzl", "generate_deps")
 
 exports_files([
     "def.bzl",
-    "deps.bzl",
 ])
 
 [
@@ -41,11 +40,6 @@ generate_deps(
     name = "golangci_lint",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
-)
-
-prune_ext_deps(
-    name = "prune_deps",
-    deps_file = "//golangci-lint:deps.bzl",
     targets = golangci_lint_analyzers(ANALYZERS, "//golangci-lint"),
 )
 

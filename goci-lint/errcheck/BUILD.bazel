@@ -6,13 +6,14 @@ go_library(
     srcs = ["analyzer.go"],
     importpath = "github.com/sluongng/nogo-analyzer/goci-lint/errcheck",
     visibility = ["//visibility:public"],
-    deps = ["@com_github_kisielk_errcheck//errcheck:go_default_library"],
+    deps = ["@com_github_kisielk_errcheck//errcheck"],
 )
 
 generate_deps(
     name = "errcheck_deps",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+    targets = ["//goci-lint/errcheck"],
 )
 
 filegroup(
@@ -21,6 +22,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "analyzer.go",
+        "deps.bzl",
         "go.mod",
         "go.sum",
     ],

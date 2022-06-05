@@ -7,7 +7,6 @@ load("//private:gen_deps.bzl", "generate_deps")
 
 exports_files([
     "def.bzl",
-    "deps.bzl",
 ])
 
 [
@@ -39,16 +38,11 @@ exports_files([
     for analyzer in ANALYZERS
 ]
 
-prune_ext_deps(
-    name = "prune_deps",
-    deps_file = "//staticcheck:deps.bzl",
-    targets = staticcheck_analyzers(ANALYZERS, "//staticcheck"),
-)
-
 generate_deps(
     name = "staticcheck",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+    targets = staticcheck_analyzers(ANALYZERS, "//staticcheck"),
 )
 
 filegroup(

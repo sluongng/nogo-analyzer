@@ -7,7 +7,7 @@ go_library(
     importpath = "github.com/sluongng/nogo-analyzer/goci-lint/gofmt",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golangci_gofmt//gofmt:go_default_library",
+        "@com_github_golangci_gofmt//gofmt",
         "@org_golang_x_tools//go/analysis",
     ],
 )
@@ -16,6 +16,7 @@ generate_deps(
     name = "gofmt_deps",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+    targets = ["//goci-lint/gofmt"],
 )
 
 filegroup(
@@ -24,6 +25,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "analyzer.go",
+        "deps.bzl",
         "go.mod",
         "go.sum",
     ],

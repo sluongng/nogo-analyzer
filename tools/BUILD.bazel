@@ -32,6 +32,7 @@ filegroup(
     srcs = [
         "BUILD.bazel",
         "goworksync.sh",
+        "prune-deps.sh",
     ],
     visibility = ["//visibility:public"],
 )
