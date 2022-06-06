@@ -30,10 +30,14 @@ def generate_deps(
 
             # Gazelle depends on `go` binary to run various commands
             # to extract module informations.
-            export GOROOT="$$(readlink $(execpath //:gobin))/../../"
+            export GO="$$(readlink $(execpath //:gobin))"
+            export PATH="$$(dirname $$GO):$$PATH"
 
             # Run gazelle
             $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name} -prune -build_external external
+            
+            # Clean up
+            rm -f WORKSPACE go.mod go.sum
 
             # Replace default load line with ours
             echo 'load("@com_github_sluongng_nogo_analyzer//private:def.bzl", go_repository = "maybe_go_repository")' > $@
