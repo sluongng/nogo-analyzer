@@ -2,15 +2,6 @@
 
 An attempt to rewrite analyzers in golangci-lint one by one while removing all the bloats.
 
-## Note on 'unused' linters
-
-`nogo` runs per-package. Meaning that it's the same with cd into each of the sub-directories and run the linter once.
-For this reason, it's not possible to detect whether or not some code was used outside of the package context.
-
-Most unused linters accomplised their checks by running on the global context of the repository, build up a map
-in-memory of what was used, and what was not used.  `nogo` does not have access to this global context of the entire
-repository thus most `unused` linters will be inaccurate.
-
 ## How to use
 
 Users should consider loading the `deps.bzl` file inside each individual linter in their WORKSPACE file.
@@ -140,3 +131,13 @@ For more examples, check out the [integration tests](./tests) setup.
 - [ ] whitespace
 - [ ] wrapcheck
 - [ ] wsl
+
+## Note on 'unused' linters
+
+rules_go's `nogo` runs per-package. Meaning that it's the same with cd into each of the sub-directories and run the linter once.
+For this reason, it's not possible to detect whether or not some code was used outside of the package's context.
+
+Most 'unused' linters accomplised their checks by running on the global context of the repository, build up an in-memory map
+of what was used, and what was not used.  `nogo` does not have access to this global context of the entire repository, but only the
+context of the current package, thus most `unused` linters will be inaccurate when instrumented by `nogo`.
+

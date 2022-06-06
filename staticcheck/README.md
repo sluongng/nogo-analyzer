@@ -12,7 +12,7 @@ Projects who have the need to use staticcheck analyzers as part of rules_go's no
 2. Load staticcheck dependencies in your WORKSPACE.
 
 ```
-load("//nogo-analyzer/staticcheck:deps.bzl", "staticcheck_deps")
+load("@com_github_sluongng_nogo_analyzer//staticcheck:deps.bzl", "staticcheck_deps")
 
 staticcheck_deps()
 ```
@@ -24,7 +24,7 @@ Note that loading `staticcheck_deps()` is completely optional, advanced users ma
 3. Configure `nogo` target in a `BUILD` file
 
 ```
-load("//nogo-analyzer/staticcheck:def.bzl", "staticcheck_analyzers")
+load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers")
 
 STATICHECK_ANALYZERS = [
     "ST1000",
