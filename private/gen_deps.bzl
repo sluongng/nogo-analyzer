@@ -34,7 +34,7 @@ def generate_deps(
             export PATH="$$(dirname $$GO):$$PATH"
 
             # Run gazelle
-            $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name} -prune -build_external external
+            $(execpath {gazelle}) update-repos -from_file=go.mod -to_macro=deps.bzl%{name} -prune
             
             # Clean up
             rm -f WORKSPACE go.mod go.sum

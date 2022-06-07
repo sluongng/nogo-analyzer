@@ -6,7 +6,6 @@ def staticcheck_deps():
         build_directives = [
             "gazelle:exclude **/testdata/**",  # keep
         ],
-        build_external = "external",  #keep
         importpath = "honnef.co/go/tools",
         sum = "h1:ytYb4rOqyp1TSa2EPvNVwtPQJctSELKaMyLfqNP4+34=",
         version = "v0.3.2",
@@ -25,7 +24,6 @@ def staticcheck_deps():
     )
     go_repository(
         name = "org_golang_x_mod",
-        build_external = "external",  #keep
         importpath = "golang.org/x/mod",
         sum = "h1:6zppjxzCulZykYSLyVDYbneBfbaBIQPYMevg0bEwv2s=",
         version = "v0.6.0-dev.0.20220419223038-86c51ed26bb4",

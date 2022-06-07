@@ -1,6 +1,8 @@
 load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
+# gazelle:exclude go.work.sum
+
 filegroup(
     name = "all_files",
     testonly = True,
@@ -17,7 +19,6 @@ filegroup(
         "bazel-testlogs",
         "def.bzl",
         "go.work",
-        "go.work.sum",
         "//.github:all_files",
         "//goci-lint:all_files",
         "//golangci-lint:all_files",
@@ -45,7 +46,6 @@ gazelle(
     args = [
         "-from_file=go.work",
         "-to_macro=private/deps.bzl%nogo_analyzer_deps",
-        "-build_external=external",
         "-prune",
     ],
     command = "update-repos",
