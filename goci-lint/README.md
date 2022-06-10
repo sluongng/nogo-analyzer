@@ -84,7 +84,7 @@ For more examples, check out the [integration tests](./tests) setup.
 - [X] gofmt
 - [ ] gofumpt
 - [ ] goheader
-- [ ] goimports
+- [X] goimports
 - [ ] golint
 - [ ] gomnd
 - [ ] gomoddirectives

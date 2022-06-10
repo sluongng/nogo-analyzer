@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
-	"regexp"
+	"strings"
 	"testing"
 
 	"github.com/bazelbuild/rules_go/go/tools/bazel_testing"
@@ -19,55 +19,70 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
 nogo(
     name = "nogo",
 		deps = [
-			"@com_github_sluongng_nogo_analyzer//goci-lint/errcheck",
+			"@com_github_sluongng_nogo_analyzer//goci-lint/goimports",
 		],
+		config = "config.json",
     visibility = ["//visibility:public"],
 )
 
 go_library(
-    name = "errcheck_fail",
-    srcs = ["errcheck_fail.go"],
-    importpath = "errcheck/fail",
+    name = "goimports_fail",
+    srcs = ["goimports_fail.go"],
+    importpath = "goimports/fail",
 )
 
 go_library(
-    name = "errcheck_ok",
-    srcs = ["errcheck_ok.go"],
-    importpath = "errcheck/ok",
+    name = "goimports_fail_import",
+    srcs = ["goimports_fail_import.go"],
+    importpath = "goimports/fail_import",
+    deps = [
+        "@org_golang_x_tools//imports",
+		]
 )
--- errcheck_fail.go --
+
+go_library(
+    name = "goimports_ok",
+    srcs = ["goimports_ok.go"],
+    importpath = "goimports/ok",
+)
+
+-- goimports_fail.go --
 package fail
 
-import "fmt"
+func foo( ) {}
+-- goimports_fail_import.go --
+package fail_import
 
-func foo() error {
-	return fmt.Errorf("blah")
-}
+import (
+	"golang.org/x/tools/imports"
+	"os"
+	"fmt"
+)
 
 func bar() {
-	foo()
+	_ = fmt.Printf
+	_ = os.Getwd
+	_ = imports.Process
 }
--- errcheck_ok.go --
+-- goimports_ok.go --
 package ok
 
-import "fmt"
-
-func foo() error {
-	return fmt.Errorf("blah")
-}
-
-func bar() {
-	if err := foo(); err != nil {
-		// Do something
+func foo() {}
+-- config.json --
+{
+	"goimports": {
+		"exclude_files": {
+			"external/.*": "ignore external dependencies"
+		}
 	}
 }
 `,
 		WorkspaceSuffix: `
 # gazelle:repository go_repository name=org_golang_x_tools importpath=golang.org/x/tools
 
-load("@com_github_sluongng_nogo_analyzer//goci-lint/errcheck:deps.bzl",  "errcheck_deps")
+load("@com_github_sluongng_nogo_analyzer//goci-lint/goimports:deps.bzl",  "goimports_deps")
 
-errcheck_deps()
+goimports_deps()
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
@@ -76,7 +91,7 @@ gazelle_dependencies()
 	})
 }
 
-func TestErrcheck(t *testing.T) {
+func TestGofmt(t *testing.T) {
 	for _, test := range []struct {
 		desc, nogo, target string
 		wantSuccess        bool
@@ -85,22 +100,51 @@ func TestErrcheck(t *testing.T) {
 		{
 			desc:        "nogo disable, no lint run",
 			nogo:        "",
-			target:      "//:errcheck_fail",
+			target:      "//:goimports_fail",
 			wantSuccess: true,
 		},
 		{
 			desc:        "nogo enable, lint ok",
 			nogo:        "@//:nogo",
-			target:      "//:errcheck_ok",
+			target:      "//:goimports_ok",
 			wantSuccess: true,
 		},
 		{
-			desc:        "nogo enable, lint fail",
+			desc:        "nogo enable, lint fail due to formatting",
 			nogo:        "@//:nogo",
-			target:      "//:errcheck_fail",
+			target:      "//:goimports_fail",
 			wantSuccess: false,
 			includes: []string{
-				"errcheck",
+				`
+@@ -1,3 +1,3 @@
+ package fail
+ 
+-func foo( ) {}
++func foo() {}
+ (goimports)`,
+			},
+		},
+		{
+			desc:        "nogo enable, lint fail due to extra import",
+			nogo:        "@//:nogo",
+			target:      "//:goimports_fail_import",
+			wantSuccess: false,
+			includes: []string{
+				`
+@@ -1,9 +1,10 @@
+ package fail_import
+ 
+ import (
+-	"golang.org/x/tools/imports"
+-	"os"
+ 	"fmt"
++	"os"
++
++	"golang.org/x/tools/imports"
+ )
+ 
+ func bar() {
+ (goimports)`,
 			},
 		},
 	} {
@@ -129,16 +173,12 @@ func TestErrcheck(t *testing.T) {
 
 			// check content of stderr
 			for _, pattern := range test.includes {
-				if matched, err := regexp.Match(pattern, stderr.Bytes()); err != nil {
-					t.Fatal(err)
-				} else if !matched {
-					t.Errorf("output did not contain pattern: %s\n", pattern)
+				if !strings.Contains(stderr.String(), pattern) {
+					t.Errorf("output contained pattern: %s", pattern)
 				}
 			}
 			for _, pattern := range test.excludes {
-				if matched, err := regexp.Match(pattern, stderr.Bytes()); err != nil {
-					t.Fatal(err)
-				} else if matched {
+				if strings.Contains(stderr.String(), pattern) {
 					t.Errorf("output contained pattern: %s", pattern)
 				}
 			}

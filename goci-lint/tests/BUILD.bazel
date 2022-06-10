@@ -16,6 +16,7 @@ load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
     for i in [
         "errcheck",
         "gofmt",
+        "goimports",
         "ineffassign",
     ]
 ]
@@ -29,6 +30,7 @@ filegroup(
         "go.mod",
         "go.sum",
         "gofmt_test.go",
+        "goimports_test.go",
         "ineffassign_test.go",
     ],
     visibility = ["//visibility:public"],

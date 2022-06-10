@@ -885,8 +885,8 @@ def nogo_analyzer_deps():
     go_repository(
         name = "org_golang_x_exp_typeparams",
         importpath = "golang.org/x/exp/typeparams",
-        sum = "h1:qyrTQ++p1afMkO4DPEeLGq/3oTsdlvdH4vqZUBWzUKM=",
-        version = "v0.0.0-20220218215828-6cf2b201936e",
+        sum = "h1:cgEEeKdnK8j1rk1+VuOegnEW9VwcNzHtz4hbfTd9ctQ=",
+        version = "v0.0.0-20220609121020-a51bd0440498",
     )
     go_repository(
         name = "org_golang_x_mod",
@@ -903,8 +903,8 @@ def nogo_analyzer_deps():
     go_repository(
         name = "org_golang_x_sys",
         importpath = "golang.org/x/sys",
-        sum = "h1:xHms4gcpe1YE7A3yIllJXP16CMAGuqwO2lX1mTyyRRc=",
-        version = "v0.0.0-20220422013727-9388b58f7150",
+        sum = "h1:z8Hj/bl9cOV2grsOpEaQFUaly0JWN3i97mo3jXKJNp0=",
+        version = "v0.0.0-20220608164250-635b8c9b7f68",
     )
     go_repository(
         name = "org_golang_x_text",
@@ -915,6 +915,6 @@ def nogo_analyzer_deps():
     go_repository(
         name = "org_golang_x_tools",
         importpath = "golang.org/x/tools",
-        sum = "h1:OKYpQQVE3DKSc3r3zHVzq46vq5YH7x8xpR3/k9ixmUg=",
-        version = "v0.1.11-0.20220513221640-090b14e8501f",
+        sum = "h1:loJ25fNOEhSXfHrpoGj91eCUThwdNX6u24rO1xnNteY=",
+        version = "v0.1.11",
     )

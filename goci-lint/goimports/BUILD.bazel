@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("//private:gen_deps.bzl", "generate_deps")
+
+go_library(
+    name = "goimports",
+    srcs = ["analyzer.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/goci-lint/goimports",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_golangci_gofmt//goimports",
+        "@org_golang_x_tools//go/analysis",
+    ],
+)
+
+generate_deps(
+    name = "goimports_deps",
+    mod_file = ":go.mod",
+    sum_file = ":go.sum",
+    targets = ["//goci-lint/goimports"],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "analyzer.go",
+        "deps.bzl",
+        "go.mod",
+        "go.sum",
+    ],
+    visibility = ["//visibility:public"],
+)
