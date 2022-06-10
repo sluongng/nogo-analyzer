@@ -59,6 +59,10 @@ func alwaysTrue(a int) string {
 }
 `,
 		WorkspaceSuffix: `
+# gazelle:repository go_repository name=org_golang_x_tools importpath=golang.org/x/tools
+# gazelle:repository go_repository name=com_github_burntsushi_toml importpath=github.com/BurntSushi/toml
+# gazelle:repository go_repository name=org_golang_x_exp_typeparams importpath=golang.org/x/exp/typeparams
+
 load("@com_github_sluongng_nogo_analyzer//staticcheck:deps.bzl",  "staticcheck_deps")
 
 staticcheck_deps()

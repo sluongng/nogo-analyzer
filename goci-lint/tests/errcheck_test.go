@@ -64,6 +64,8 @@ func bar() {
 }
 `,
 		WorkspaceSuffix: `
+# gazelle:repository go_repository name=org_golang_x_tools importpath=golang.org/x/tools
+
 load("@com_github_sluongng_nogo_analyzer//goci-lint/errcheck:deps.bzl",  "errcheck_deps")
 
 errcheck_deps()

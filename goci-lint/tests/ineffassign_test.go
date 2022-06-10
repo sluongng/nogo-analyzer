@@ -52,6 +52,8 @@ func foo(a string) string {
 }
 `,
 		WorkspaceSuffix: `
+# gazelle:repository go_repository name=org_golang_x_tools importpath=golang.org/x/tools
+
 load("@com_github_sluongng_nogo_analyzer//goci-lint/ineffassign:deps.bzl",  "ineffassign_deps")
 
 ineffassign_deps()
