@@ -27,23 +27,20 @@ func run(pass *analysis.Pass) (any, error) {
 		fileNames = append(fileNames, pos.Filename)
 	}
 
-	issueCount := 0
-
 	for _, f := range fileNames {
-		b, err := gofmt.Run(f, needSimplify)
+		diff, err := gofmt.Run(f, needSimplify)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("could not run gofmt: %v", err)
 		}
-		if b == nil {
+
+		if diff == nil {
 			continue
 		}
 
-		fmt.Printf("gofmt diff: \n%s", string(b))
-		issueCount++
-	}
-
-	if issueCount > 0 {
-		return nil, fmt.Errorf("gofmt check failed on some files")
+		pass.Report(analysis.Diagnostic{
+			Pos:     1,
+			Message: fmt.Sprintf("\n%s", diff),
+		})
 	}
 
 	return nil, nil

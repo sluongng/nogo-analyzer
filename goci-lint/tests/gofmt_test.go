@@ -81,7 +81,12 @@ func TestGofmt(t *testing.T) {
 			target:      "//:gofmt_fail",
 			wantSuccess: false,
 			includes: []string{
-				"gofmt",
+				// Notes that these regexp are equal to litteral matches of these:
+				//   -func foo( ) {}
+				//   +func foo() {}
+				`-func foo\( \) \{\}`,
+				`\+func foo\(\) \{\}`,
+				"(gofmt)",
 			},
 		},
 	} {
