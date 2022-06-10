@@ -80,6 +80,7 @@ def copy_file_to_current_dir(name, from_target, to_file_name):
         (
             cd \\$$BUILD_WORKING_DIRECTORY || (echo 'could not find working directory' && exit 1)
             cp -f \\$$BUILD_WORKSPACE_DIRECTORY/$(execpath {from_target}) {to_file}
+            chmod 644 {to_file}
         )
         """.format(
             from_target = from_target,
