@@ -61,7 +61,7 @@ def nogo_config(name, out, analyzers, override = {}, default = {
         out = out,
         content = [
             json.encode_indent({
-                analyzer: overrides.get(analyzer, defaults)
+                analyzer: override.get(analyzer, default)
                 for analyzer in analyzers
             }),
         ],
