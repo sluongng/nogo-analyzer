@@ -17,7 +17,7 @@ load("@com_github_sluongng_nogo_analyzer//staticcheck:deps.bzl", "staticcheck_de
 staticcheck_deps()
 ```
 
-`gazelle_dependencies()` may contains an outdated version of `staticcheck` so you should load `staticcheck_deps()` before `gazelle_dependencies()` in WORKSPACE to ensure that the supported version is in used.
+**NOTE**: Make sure you load `staticcheck_deps()` before `gazelle_dependencies()`, as well as any other rules that use `go_repository`, because this can lead to dependency conflicts.
 
 Note that loading `staticcheck_deps()` is completely optional, advanced users may want to manage their own staticcheck dependencies separately in their WORKSPACE file.
 
