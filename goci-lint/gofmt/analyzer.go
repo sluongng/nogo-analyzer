@@ -30,7 +30,7 @@ func run(pass *analysis.Pass) (any, error) {
 	for _, f := range fileNames {
 		diff, err := gofmt.Run(f, needSimplify)
 		if err != nil {
-			return nil, fmt.Errorf("could not run gofmt: %v", err)
+			return nil, fmt.Errorf("could not run gofmt: %w", err)
 		}
 
 		if diff == nil {
