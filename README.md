@@ -23,6 +23,7 @@ Add this into your WORKSPACE project
 http_archive(
     name = "com_github_sluongng_nogo_analyzer",
     sha256 = "ab9ab7936b6d490ff92bb8e3e03bc3ace3406f0b4d1625cc0720d0e9e81a369a",
+    strip_prefix = "nogo-analyzer-0.0.1",
     urls = [
         "https://github.com/sluongng/nogo-analyzer/archive/refs/tags/v0.0.1.tar.gz",
     ],

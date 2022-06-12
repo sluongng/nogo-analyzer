@@ -34,7 +34,7 @@ STATICHECK_ANALYZERS = [
 
 nogo(
     name = "nogo",
-    deps = staticcheck_analyzers([STATICHECK_ANALYZERS]),
+    deps = staticcheck_analyzers(STATICHECK_ANALYZERS),
     visibility = ["//visibility:public"],
 )
 ```
@@ -44,7 +44,7 @@ Note here that `staticcheck_analyzers` return a list which can be combined with 
 ```
 nogo(
     name = "nogo",
-    deps = TOOLS_NOGO + staticcheck_analyzers([STATICHECK_ANALYZERS]),
+    deps = TOOLS_NOGO + staticcheck_analyzers(STATICHECK_ANALYZERS),
     visibility = ["//visibility:public"],
 )
 ```
