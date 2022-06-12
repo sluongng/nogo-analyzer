@@ -1,6 +1,11 @@
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
 
-def nogo_config(name, out, analyzers):
+def nogo_config(name, out, analyzers, override = {}, default = {
+    "exclude_files": {
+        # Don't run linters on external dependencies
+        "external/": "third_party",
+    },
+}):
     """
     nogo_config is a handy function that creates the nogo config json file programmatically from starlark
 
@@ -16,6 +21,14 @@ def nogo_config(name, out, analyzers):
             name = "nogo_config",
             out = "nogo_config.json",
             analyzers = ["ABC1001", "ABC1002"],
+            override = {
+                "ABC1002": {
+                    "exclude_files": {
+                        "external/": "third_party",
+                        "proto/": "generated protobuf",
+                    },
+                },
+            },
         )
 
         The json would be generated from this would look like this:
@@ -28,7 +41,8 @@ def nogo_config(name, out, analyzers):
             },
             "ABC1002": {
                 "exclude_files": {
-                    "external/": "third_party"
+                    "external/": "third_party",
+                    "proto/": "generated protobuf"
                 }
             }
         }
@@ -47,12 +61,7 @@ def nogo_config(name, out, analyzers):
         out = out,
         content = [
             json.encode_indent({
-                analyzer: {
-                    "exclude_files": {
-                        # Don't run linters on external dependencies
-                        "external/": "third_party",
-                    },
-                }
+                analyzer: overrides.get(analyzer, defaults)
                 for analyzer in analyzers
             }),
         ],
