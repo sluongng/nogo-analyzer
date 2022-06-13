@@ -15,6 +15,7 @@ filegroup(
         "LICENSE",
         "README.md",
         "WORKSPACE",
+        "buildbuddy.yaml",
         "def.bzl",
         "go.work",
         "//.github:all_files",
