@@ -3,6 +3,7 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 
 # gazelle:exclude .user.bazelrc
 # gazelle:exclude go.work.sum
+# gazelle:exclude bazel-*
 
 filegroup(
     name = "all_files",
@@ -11,12 +12,9 @@ filegroup(
         ".bazelrc",
         ".gitignore",
         "BUILD.bazel",
+        "LICENSE",
         "README.md",
         "WORKSPACE",
-        "bazel-bin",
-        "bazel-nogo-analyzer",
-        "bazel-out",
-        "bazel-testlogs",
         "def.bzl",
         "go.work",
         "//.github:all_files",
