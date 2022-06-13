@@ -5,7 +5,7 @@ filegroup(
     testonly = True,
     srcs = [
         "BUILD.bazel",
-        "gazelle-go-work.patch",
+        "gazelle-revert-bazel-tools-patch.patch",
     ],
     visibility = ["//visibility:public"],
 )

@@ -15,11 +15,12 @@ http_archive(
     name = "bazel_gazelle",
     patch_args = ["-p1"],
     patches = [
-        "@com_github_sluongng_nogo_analyzer//third-party:gazelle-go-work.patch",
+        "@com_github_sluongng_nogo_analyzer//third-party:gazelle-revert-bazel-tools-patch.patch",
     ],
-    strip_prefix = "bazel-gazelle-b81a7ba1d8cbab5b603c76e30333ea4b97df07d6",
+    sha256 = "9f7296636d7a2ddf88edb96f1807d2599922dec412ee892d452097d16f664878",
+    strip_prefix = "bazel-gazelle-55d692e6cb1ec5e44ef102939145a18e1ccc6017",
     urls = [
-        "https://github.com/bazelbuild/bazel-gazelle/archive/b81a7ba1d8cbab5b603c76e30333ea4b97df07d6.zip",
+        "https://github.com/bazelbuild/bazel-gazelle/archive/55d692e6cb1ec5e44ef102939145a18e1ccc6017.zip",
     ],
 )
 
