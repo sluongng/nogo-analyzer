@@ -9,6 +9,7 @@ go_bazel_test(
         "@io_bazel_rules_go//:all_files",
         "@bazel_gazelle//:all_files",
     ],
+    tags = ["manual"],
 )
 
 filegroup(
