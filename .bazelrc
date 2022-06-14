@@ -25,25 +25,25 @@ test --test_size_filters=small
 test:all --test_size_filters=
 
 # Remote cache configs
+build --remote_timeout=3600
 build --experimental_remote_cache_async
 build --experimental_remote_cache_compression
 build --experimental_remote_merkle_tree_cache
 build --experimental_remote_merkle_tree_cache_size=10000
 
+build:local-remote-cache --remote_cache=grpcs://remote.buildbuddy.io
+build:local-remote-cache --bes_upload_mode=fully_async
+
 # BuildBuddy config
-build:buildbuddy --remote_cache=grpcs://remote.buildbuddy.io
-build:buildbuddy --remote_timeout=3600
-
-build:buildbuddy-local --config=buildbuddy
-build:buildbuddy-local --bes_upload_mode=fully_async
-
-build:ci --config=buildbuddy
-test:ci --keep_going
+build:workflows --config=buildbuddy_bes_backend
+build:workflows --config=buildbuddy_bes_results_url
+build:workflows --config=buildbuddy_remote_cache
+test:workflows --keep_going
 
 # Personal override (and creds)
 try-import .user.bazelrc
 
 ## Sample .user.bazelrc ##
 #
-# build --config=buildbuddy-local
+# build --config=local-remote-cache
 # build --remote_header=x-buildbuddy-api-key=<api-key>

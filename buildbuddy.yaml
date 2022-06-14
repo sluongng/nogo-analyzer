@@ -8,4 +8,4 @@ actions:
         branches:
           - "*"
     bazel_commands:
-      - "test --config=ci //..."
+      - "test --config=workflows //..."
