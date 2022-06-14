@@ -74,15 +74,15 @@ def copy_file_to_current_dir(name, from_target, to_file_name):
         name = name,
         outs = ["cp_file_{}.sh".format(to_file_name)],
         cmd = """
-        cat > $@ <<EOF
-        #!/bin/bash -x
+cat > $@ <<EOF
+#!/bin/bash
 
-        (
-            cd \\$$BUILD_WORKING_DIRECTORY || (echo 'could not find working directory' && exit 1)
-            cp -f \\$$BUILD_WORKSPACE_DIRECTORY/$(execpath {from_target}) {to_file}
-            chmod 644 {to_file}
-        )
-        """.format(
+(
+    cd \\$$BUILD_WORKING_DIRECTORY || (echo 'could not find working directory' && exit 1)
+    cp -f \\$$BUILD_WORKSPACE_DIRECTORY/$(execpath {from_target}) {to_file}
+    chmod 644 {to_file}
+)
+EOF""".format(
             from_target = from_target,
             to_file = to_file_name,
         ),
