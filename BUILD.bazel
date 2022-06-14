@@ -22,7 +22,6 @@ filegroup(
         "//golangci-lint:all_files",
         "//private:all_files",
         "//staticcheck:all_files",
-        "//third-party:all_files",
         "//tools:all_files",
     ],
     visibility = ["//visibility:public"],
