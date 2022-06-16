@@ -19,7 +19,23 @@ staticcheck_deps()
 
 **NOTE**: Make sure you load `staticcheck_deps()` before `gazelle_dependencies()`, as well as any other rules that use `go_repository`, because this can lead to dependency conflicts.
 
-Note that loading `staticcheck_deps()` is completely optional, advanced users may want to manage their own staticcheck dependencies separately in their WORKSPACE file.
+**NOTE**: Loading `staticcheck_deps()` is optional, advanced users may want to manage their own staticcheck dependencies separately in their WORKSPACE file. As long as all the dependencies inside `//staticcheck:deps.bzl` is loaded in your workspace with a compatible version to the dependencies in this repo, then things should continue to work.
+
+> How do I verify which version of staticcheck I have in my workspace?
+
+You can run this query and validate which version bazel is using.
+
+```
+> bazel query '//external:co_honnef_go_tools' --output=build
+go_repository(
+  name = "co_honnef_go_tools",
+  generator_name = "co_honnef_go_tools",
+  generator_function = "nogo_analyzer_deps",
+  importpath = "honnef.co/go/tools",
+  version = "vX.Y.Z",
+  sum = "h1:abcdxyzw",
+)
+```
 
 3. Configure `nogo` target in a `BUILD` file
 
