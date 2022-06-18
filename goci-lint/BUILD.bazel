@@ -8,6 +8,7 @@ filegroup(
         "//goci-lint/gofmt:all_files",
         "//goci-lint/goimports:all_files",
         "//goci-lint/ineffassign:all_files",
+        "//goci-lint/prealloc:all_files",
         "//goci-lint/tests:all_files",
     ],
     visibility = ["//visibility:public"],

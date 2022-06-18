@@ -5,6 +5,7 @@ use (
 	./goci-lint/gofmt
 	./goci-lint/goimports
 	./goci-lint/ineffassign
+	./goci-lint/prealloc
 	./goci-lint/tests
 	./golangci-lint
 	./private
