@@ -111,7 +111,7 @@ For more examples, check out the [integration tests](./tests) setup.
 - [ ] nonamedreturns
 - [ ] nosprintfhostport
 - [ ] paralleltest
-- [ ] prealloc
+- [X] prealloc
 - [ ] predeclared
 - [ ] promlinter
 - [ ] revive

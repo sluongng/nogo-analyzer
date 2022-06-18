@@ -325,6 +325,12 @@ def nogo_analyzer_deps():
         version = "v0.3.5",
     )
     go_repository(
+        name = "com_github_golangci_prealloc",
+        importpath = "github.com/golangci/prealloc",
+        sum = "h1:leSNB7iYzLYSSx3J/s5sVf4Drkc68W2wm4Ixh/mr0us=",
+        version = "v0.0.0-20180630174525-215b22d4de21",
+    )
+    go_repository(
         name = "com_github_golangci_unconvert",
         importpath = "github.com/golangci/unconvert",
         sum = "h1:zwtduBRr5SSWhqsYNgcuWO2kFlpdOZbP0+yRjmvPGys=",
