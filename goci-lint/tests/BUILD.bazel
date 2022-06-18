@@ -6,7 +6,10 @@ load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
     go_bazel_test(
         name = i,
         size = "medium",
-        srcs = [i + "_test.go"],
+        srcs = [
+            i + "_test.go",
+            "util.go",
+        ],
         rule_files = [
             "@com_github_sluongng_nogo_analyzer//:all_files",
             "@io_bazel_rules_go//:all_files",
@@ -34,6 +37,7 @@ filegroup(
         "goimports_test.go",
         "ineffassign_test.go",
         "prealloc_test.go",
+        "util.go",
     ],
     visibility = ["//visibility:public"],
 )
