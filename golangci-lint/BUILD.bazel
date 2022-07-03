@@ -42,6 +42,7 @@ generate_deps(
     name = "golangci_lint",
     mod_file = ":go.mod",
     sum_file = ":go.sum",
+    tags = ["manual"],
     targets = golangci_lint_analyzers(ANALYZERS, "//golangci-lint"),
 )
 
