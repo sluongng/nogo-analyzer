@@ -184,12 +184,29 @@ def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_an
         )
 
     To enable all staticcheck analyzers:
-        load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "ANALYZERS")
+        load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
 
         nogo(
             name = "nogo",
-            deps = TOOLS_NOGO + staticcheck_analyzers([ANALYZERS]),
+            deps = TOOLS_NOGO + staticcheck_analyzers(ANALYZERS),
             visibility = ["//visibility:public"],
         )
+
+    Add the '-' prefix to remove selected analyzers from ANALYZERS:
+        load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
+
+        nogo(
+            name = "nogo",
+            deps = TOOLS_NOGO + staticcheck_analyzers(ANALYZERS + ["-U1000"]),
+            visibility = ["//visibility:public"],
+        )
+
     """
-    return [prefix_path + ":" + a for a in analyzers]
+    qualified_analyzers = {}
+    for analyzer in analyzers:
+        # Remove analyzers prefixed with a '-'
+        if analyzer.startswith("-"):
+            qualified_analyzers.pop(prefix_path + ":" + analyzer[1:])
+        else:
+            qualified_analyzers[prefix_path + ":" + analyzer] = ""
+    return qualified_analyzers.keys()
