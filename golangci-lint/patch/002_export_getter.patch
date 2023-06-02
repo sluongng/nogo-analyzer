@@ -83,3 +83,4 @@ index 7e4cf902e7..366f3fd084 100644
 +			saveIssuesToCache(pkgs, pkgsFromCache, issues, lintCtx, cfg.GetAnalyzers())
  		}
  	}()
+

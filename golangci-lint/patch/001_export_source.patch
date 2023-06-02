@@ -2,8 +2,8 @@ Patches the gazelle-generated BUILD.bazel file so that
 we can export all Go files in the package for further analysis
 and code generation.
 
---- a/pkg/golinters/BUILD.bazel 2022-05-13 11:15:05.460642945 +0200
-+++ b/pkg/golinters/BUILD.bazel 2022-05-13 11:16:12.074084177 +0200
+--- a/pkg/golinters/BUILD.bazel
++++ b/pkg/golinters/BUILD.bazel
 @@ -1,5 +1,11 @@
  load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 

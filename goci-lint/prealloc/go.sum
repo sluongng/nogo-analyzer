@@ -1,3 +1,3 @@
 github.com/golangci/prealloc v0.0.0-20180630174525-215b22d4de21 h1:leSNB7iYzLYSSx3J/s5sVf4Drkc68W2wm4Ixh/mr0us=
 github.com/golangci/prealloc v0.0.0-20180630174525-215b22d4de21/go.mod h1:tf5+bzsHdTM0bsB7+8mt0GUMvjCgwLpTapNZHU8AajI=
-golang.org/x/tools v0.4.1-0.20221208213631-3f74d914ae6d h1:9ZNWAi4CYhNv60mXGgAncgq7SGc5qa7C8VZV8Tg7Ggs=
+golang.org/x/tools v0.9.3 h1:Gn1I8+64MsuTb/HpH+LmQtNas23LhUVr3rYZ0eKuaMM=

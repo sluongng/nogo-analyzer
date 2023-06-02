@@ -4,12 +4,18 @@ def gofmt_deps():
     go_repository(
         name = "com_github_golangci_gofmt",
         importpath = "github.com/golangci/gofmt",
-        sum = "h1:iR3fYXUjHCR97qWS8ch1y9zPNsgXThGwjKPrYfqMPks=",
-        version = "v0.0.0-20190930125516-244bba706f1a",
+        sum = "h1:amWTbTGqOZ71ruzrdA+Nx5WA3tV1N0goTspwmKCQvBY=",
+        version = "v0.0.0-20220901101216-f2edd75033f2",
+    )
+    go_repository(
+        name = "org_golang_x_sync",
+        importpath = "golang.org/x/sync",
+        sum = "h1:PUR+T4wwASmuSTYdKjYHI5TD22Wy5ogLU5qZCOLxBrI=",
+        version = "v0.2.0",
     )
     go_repository(
         name = "org_golang_x_tools",
         importpath = "golang.org/x/tools",
-        sum = "h1:loJ25fNOEhSXfHrpoGj91eCUThwdNX6u24rO1xnNteY=",
-        version = "v0.1.11",
+        sum = "h1:Gn1I8+64MsuTb/HpH+LmQtNas23LhUVr3rYZ0eKuaMM=",
+        version = "v0.9.3",
     )
