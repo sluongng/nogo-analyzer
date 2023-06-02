@@ -5,14 +5,14 @@ go 1.18
 require (
 	github.com/bazelbuild/rules_go v0.32.0
 	github.com/golangci/golangci-lint v1.46.1
-	golang.org/x/tools v0.1.11
+	golang.org/x/tools v0.4.1-0.20221208213631-3f74d914ae6d
 )
 
 require (
 	4d63.com/gochecknoglobals v0.1.0 // indirect
 	github.com/Antonboom/errname v0.1.6 // indirect
 	github.com/Antonboom/nilnil v0.1.1 // indirect
-	github.com/BurntSushi/toml v1.1.0 // indirect
+	github.com/BurntSushi/toml v1.2.1 // indirect
 	github.com/Djarvur/go-err113 v0.0.0-20210108212216-aea10b59be24 // indirect
 	github.com/GaijinEntertainment/go-exhaustruct/v2 v2.1.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
@@ -146,16 +146,16 @@ require (
 	github.com/yagipy/maintidx v1.0.0 // indirect
 	github.com/yeya24/promlinter v0.2.0 // indirect
 	gitlab.com/bosi/decorder v0.2.1 // indirect
-	golang.org/x/exp/typeparams v0.0.0-20220609121020-a51bd0440498 // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20220608164250-635b8c9b7f68 // indirect
-	golang.org/x/text v0.3.7 // indirect
+	golang.org/x/exp/typeparams v0.0.0-20221208152030-732eee02a75a // indirect
+	golang.org/x/mod v0.7.0 // indirect
+	golang.org/x/sync v0.1.0 // indirect
+	golang.org/x/sys v0.3.0 // indirect
+	golang.org/x/text v0.5.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
-	honnef.co/go/tools v0.3.2 // indirect
+	honnef.co/go/tools v0.4.3 // indirect
 	mvdan.cc/gofumpt v0.3.1 // indirect
 	mvdan.cc/interfacer v0.0.0-20180901003855-c20040233aed // indirect
 	mvdan.cc/lint v0.0.0-20170908181259-adc824a0674b // indirect
