@@ -1,6 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 load("//staticcheck:def.bzl", "ANALYZERS", "staticcheck_analyzers")
-load("//private:deps_test.bzl", "prune_ext_deps")
 load("//private:gen_deps.bzl", "generate_deps")
 load("//:def.bzl", "nogo_config")
 

@@ -3,7 +3,7 @@ package staticcheck_test
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"os"
 	"regexp"
 	"strings"
 	"testing"
@@ -173,7 +173,7 @@ func Test(t *testing.T) {
 }
 
 func replaceInFile(path, old, new string, once bool) error {
-	data, err := ioutil.ReadFile(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		return err
 	}
@@ -182,5 +182,5 @@ func replaceInFile(path, old, new string, once bool) error {
 	} else {
 		data = bytes.ReplaceAll(data, []byte(old), []byte(new))
 	}
-	return ioutil.WriteFile(path, data, 0o666)
+	return os.WriteFile(path, data, 0o666)
 }

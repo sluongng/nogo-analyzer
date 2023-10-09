@@ -32,8 +32,27 @@ var Analyzers = func() map[string]*analysis.Analyzer {
 
 func FindAnalyzerByName(name string) *analysis.Analyzer {
 	if a, ok := Analyzers[name]; ok {
-		return a
+		return wrapAnalyzer(a)
 	}
 
 	panic(fmt.Sprintf("not a valid staticcheck analyzer: %s", name))
+}
+
+func wrapAnalyzer(a *analysis.Analyzer) *analysis.Analyzer {
+	originalRun := a.Run
+	a.Run = func(pass *analysis.Pass) (interface{}, error) {
+		originalReport := pass.Report
+		ignores := asIgnores(pass.Fset, a.Name, lint.ParseDirectives(pass.Files, pass.Fset))
+		if len(ignores) > 0 {
+			pass.Report = func(d analysis.Diagnostic) {
+				if !isIgnored(pass.Fset, ignores, d) {
+					originalReport(d)
+				}
+			}
+		}
+
+		return originalRun(pass)
+
+	}
+	return a
 }

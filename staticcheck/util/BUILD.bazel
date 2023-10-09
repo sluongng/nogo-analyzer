@@ -4,7 +4,10 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "util",
-    srcs = ["util.go"],
+    srcs = [
+        "directive.go",
+        "util.go",
+    ],
     importpath = "github.com/sluongng/nogo-analyzer/staticcheck/util",
     visibility = ["//visibility:public"],
     deps = [
