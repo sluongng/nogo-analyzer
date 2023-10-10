@@ -38,6 +38,8 @@ func FindAnalyzerByName(name string) *analysis.Analyzer {
 	panic(fmt.Sprintf("not a valid staticcheck analyzer: %s", name))
 }
 
+// wrapAnalyzer modifies the original staticcheck's analyzer report and filters out
+// issues on lines or files that was marked as ignored by staticcheck's directive.
 func wrapAnalyzer(a *analysis.Analyzer) *analysis.Analyzer {
 	originalRun := a.Run
 	a.Run = func(pass *analysis.Pass) (interface{}, error) {
