@@ -4,7 +4,6 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"reflect"
 	"testing"
 
 	"honnef.co/go/tools/analysis/lint"
@@ -58,9 +57,28 @@ func alwaysTrue(a int) string {
 			}
 
 			igs := asIgnores(fset, test.check, lds)
-			if !reflect.DeepEqual(igs, test.expectedIgnores) {
-				t.Errorf("Expected ingores of %+v ignores, got %+v", test.expectedIgnores, igs)
+			if !slicesEquivalent(igs, test.expectedIgnores) {
+				t.Errorf("Expected ignores of %+v ignores, got %+v", test.expectedIgnores, igs)
 			}
 		})
 	}
+}
+
+func slicesEquivalent(actual, expected []ignore) bool {
+	if len(actual) != len(expected) {
+		return false
+	}
+
+	expectedAsMap := make(map[ignore]struct{})
+	for _, e := range expected {
+		expectedAsMap[e] = struct{}{}
+	}
+
+	for i := range actual {
+		if _, ok := expectedAsMap[actual[i]]; !ok {
+			return false
+		}
+	}
+
+	return true
 }
