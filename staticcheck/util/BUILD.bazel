@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 # gazelle:lang test_filegroup,go
 
@@ -21,11 +21,21 @@ go_library(
     ],
 )
 
+go_test(
+    name = "util_test",
+    size = "small",
+    srcs = ["directive_test.go"],
+    embed = [":util"],
+    deps = ["@co_honnef_go_tools//analysis/lint"],
+)
+
 filegroup(
     name = "all_files",
     testonly = True,
     srcs = [
         "BUILD.bazel",
+        "directive.go",
+        "directive_test.go",
         "util.go",
     ],
     visibility = ["//visibility:public"],

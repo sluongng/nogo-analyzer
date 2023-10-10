@@ -30,11 +30,15 @@ func (fi fileIgnore) match(pos token.Position) bool {
 	return pos.Filename == fi.File
 }
 
-func asIgnores(fs *token.FileSet, category string, lds []lint.Directive) []ignore {
+// asIgnores parses the staticcheck directives and returns a list of ignores. It takes inspiration
+// from https://github.com/dominikh/go-tools/blob/4ec1f474ca6c0feb8e10a8fcca4ab95f5b5b9881/lintcmd/lint.go#L324-L373
+// and https://github.com/dominikh/go-tools/blob/4ec1f474ca6c0feb8e10a8fcca4ab95f5b5b9881/lintcmd/directives.go
+// Although not expicitly documented, staticcheck directives can be specified as path-like patterns: e.g. ST1*
+func asIgnores(fs *token.FileSet, analyzerName string, lds []lint.Directive) []ignore {
 	var igs []ignore
 	for _, ld := range lds {
 		for _, c := range strings.Split(ld.Arguments[0], ",") {
-			if m, _ := filepath.Match(c, category); m {
+			if m, _ := filepath.Match(c, analyzerName); m {
 				pos := fs.Position(ld.Node.Pos())
 				switch ld.Command {
 				case "ignore":
