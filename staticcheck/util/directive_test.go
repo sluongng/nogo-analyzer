@@ -4,6 +4,7 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
+	"reflect"
 	"testing"
 
 	"honnef.co/go/tools/analysis/lint"
@@ -65,8 +66,9 @@ func alwaysTrue(a int) string {
 }
 
 func slicesEquivalent(actual, expected []ignore) bool {
-	if len(actual) != len(expected) {
-		return false
+	actualAsMap := make(map[ignore]struct{})
+	for _, e := range actual {
+		actualAsMap[e] = struct{}{}
 	}
 
 	expectedAsMap := make(map[ignore]struct{})
@@ -74,11 +76,5 @@ func slicesEquivalent(actual, expected []ignore) bool {
 		expectedAsMap[e] = struct{}{}
 	}
 
-	for i := range actual {
-		if _, ok := expectedAsMap[actual[i]]; !ok {
-			return false
-		}
-	}
-
-	return true
+	return reflect.DeepEqual(actualAsMap, expectedAsMap)
 }
