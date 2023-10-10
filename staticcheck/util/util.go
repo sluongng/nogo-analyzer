@@ -52,7 +52,7 @@ func wrapAnalyzer(a *analysis.Analyzer) *analysis.Analyzer {
 		}
 
 		return originalRun(pass)
-
 	}
+	
 	return a
 }
