@@ -71,3 +71,9 @@ Please refer to [nogo's documentation](https://github.com/bazelbuild/rules_go/bl
 
 In [def.bzl](../def.bzl) we provide a helper function that would help you generate the json config file programmatically
 using starlark.  The `external/` regex is excluded by default as that included all the external dependencies.
+
+5. (Optional) If needed, use staticcheck linter directives
+
+If there is code that should fail certain checks, we respect the staticcheck's linter directives to
+ignore specific problems. Please refer to [staticcheck's documentation](https://staticcheck.io/docs/configuration/#ignoring-problems) for more details on how to add them. Note that due to the way that
+staticcheck runs on the nogo framework, we do not report on unused linter directives.
