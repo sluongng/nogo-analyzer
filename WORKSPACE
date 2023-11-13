@@ -4,37 +4,37 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "io_bazel_rules_go",
-    sha256 = "6dc2da7ab4cf5d7bfc7c949776b1b7c733f05e56edc4bcd9022bb249d2e2a996",
+    sha256 = "91585017debb61982f7054c9688857a2ad1fd823fc3f9cb05048b0025c47d023",
     urls = [
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.39.1/rules_go-v0.39.1.zip",
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.39.1/rules_go-v0.39.1.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.42.0/rules_go-v0.42.0.zip",
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.42.0/rules_go-v0.42.0.zip",
     ],
 )
 
 http_archive(
     name = "bazel_gazelle",
-    sha256 = "afd653c84e3cfedd3c227f2b004c787d143c5c246747d3a27d0d83a005bb9142",
-    strip_prefix = "bazel-gazelle-e770d465ac089e1a5a25da2034180cd1bb05b32b",
+    sha256 = "b7387f72efb59f876e4daae42f1d3912d0d45563eac7cb23d1de0b094ab588cf",
     urls = [
-        "https://github.com/bazelbuild/bazel-gazelle/archive/e770d465ac089e1a5a25da2034180cd1bb05b32b.zip",
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.34.0/bazel-gazelle-v0.34.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.34.0/bazel-gazelle-v0.34.0.tar.gz",
     ],
 )
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "8b28fdd45bab62d15db232ec404248901842e5340299a57765e48abe8a80d930",
-    strip_prefix = "protobuf-3.20.1",
+    sha256 = "0ae3651eb955922d6ec829f4f97e7054855ed36f1e13cbe7e600a2868dcded77",
+    strip_prefix = "protobuf-4.25.0",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.20.1.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v4.25.0.tar.gz",
     ],
 )
 
 http_archive(
     name = "com_github_bazelbuild_buildtools",
-    sha256 = "e3bb0dc8b0274ea1aca75f1f8c0c835adbe589708ea89bf698069d0790701ea3",
-    strip_prefix = "buildtools-5.1.0",
+    sha256 = "42968f9134ba2c75c03bb271bd7bb062afb7da449f9b913c96e5be4ce890030a",
+    strip_prefix = "buildtools-6.3.3",
     urls = [
-        "https://github.com/bazelbuild/buildtools/archive/refs/tags/5.1.0.tar.gz",
+        "https://github.com/bazelbuild/buildtools/archive/refs/tags/v6.3.3.tar.gz",
     ],
 )
 
@@ -47,7 +47,7 @@ load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_depe
 
 go_rules_dependencies()
 
-go_register_toolchains(version = "1.20.4")
+go_register_toolchains(version = "1.21.4")
 
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
