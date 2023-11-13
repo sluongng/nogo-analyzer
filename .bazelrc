@@ -31,8 +31,8 @@ build --experimental_remote_cache_compression
 build --experimental_remote_merkle_tree_cache
 build --experimental_remote_merkle_tree_cache_size=10000
 
-build:local-remote-cache --remote_cache=grpcs://remote.buildbuddy.io
-build:local-remote-cache --bes_upload_mode=fully_async
+build:remote-cache --remote_cache=grpcs://remote.buildbuddy.io
+build:remote-cache --bes_upload_mode=fully_async
 
 # BuildBuddy config
 build:workflows --config=buildbuddy_bes_backend
