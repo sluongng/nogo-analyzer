@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
+
+go_bazel_test(
+    name = "tests",
+    size = "medium",
+    srcs = ["staticcheck_test.go"],
+    rule_files = [
+        "@com_github_sluongng_nogo_analyzer//:all_files",
+        "@io_bazel_rules_go//:all_files",
+        "@bazel_gazelle//:all_files",
+    ],
+)
+
+filegroup(
+    name = "all_files",
+    testonly = True,
+    srcs = [
+        "BUILD.bazel",
+        "staticcheck_test.go",
+    ],
+    visibility = ["//visibility:public"],
+)

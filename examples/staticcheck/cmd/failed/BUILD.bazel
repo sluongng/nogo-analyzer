@@ -1,12 +1,5 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
-go_library(
-    name = "failed_lib",
-    srcs = ["main.go"],
-    importpath = "github.com/sluongng/nogo-analyzer/examples/staticcheck/cmd/failed",
-    visibility = ["//visibility:private"],
-)
-
 # fails with an error:
 #
 # compilepkg: nogo: errors found by nogo during build-time code analysis:
@@ -14,6 +7,13 @@ go_library(
 # cmd/failed/main.go:10:14: sleeping for 1 nanoseconds is probably a bug; be explicit if it isn't (SA1004)
 #
 # Check SA4013 is excluded
+go_library(
+    name = "failed_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/examples/staticcheck/cmd/failed",
+    visibility = ["//visibility:private"],
+)
+
 go_binary(
     name = "failed",
     embed = [":failed_lib"],
