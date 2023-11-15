@@ -22,7 +22,7 @@ test --test_env=GOROOT
 
 # Test configs
 test --test_size_filters=small
-test:all --test_size_filters=
+test:test-all --test_size_filters=
 
 # Remote cache configs
 build --remote_timeout=3600
@@ -38,10 +38,7 @@ build:remote-cache --bes_upload_mode=fully_async
 build:workflows --config=buildbuddy_bes_backend
 build:workflows --config=buildbuddy_bes_results_url
 build:workflows --config=buildbuddy_remote_cache
-## TODO: remove this once BuildBuddy folks confirmed that 
-## the bug has been fixed on their end regarding command is 
-## not publicly displayed.
-build:workflows --build_metadata=VISIBILITY=PUBLIC
+test:workflows --config=test-all
 test:workflows --keep_going
 
 # Personal override (and creds)
