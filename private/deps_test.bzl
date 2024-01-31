@@ -25,7 +25,7 @@ def prune_ext_deps(name, targets, deps_file, size = "small", **kwargs):
         ],
         cmd = """
             grep '^@' $(location :{}_deps) |
-                sed 's|//.*||; s/@//' |
+                sed 's|//.*||; s/@//g' |
                 sort |
                 uniq > $@
         """.format(name),
