@@ -1,0 +1,13 @@
+# Copied part from the repo root.
+#
+test --test_output=errors
+test --test_verbose_timeout_warnings
+# BuildBuddy config
+build:workflows --config=buildbuddy_bes_backend
+build:workflows --config=buildbuddy_bes_results_url
+build:workflows --config=buildbuddy_remote_cache
+## TODO: remove this once BuildBuddy folks confirmed that
+## the bug has been fixed on their end regarding command is
+## not publicly displayed.
+build:workflows --build_metadata=VISIBILITY=PUBLIC
+test:workflows --keep_going

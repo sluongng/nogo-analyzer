@@ -1,0 +1,32 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers")
+load("@com_github_sluongng_nogo_analyzer//:def.bzl", "nogo_config")
+load("@io_bazel_rules_go//go:def.bzl", "TOOLS_NOGO", "nogo")
+load(":staticcheck.bzl", "STATICCHECK_ANALYZERS", "STATICCHECK_OVERRIDE")
+
+# gazelle:prefix github.com/sluongng/nogo-analyzer/examples/staticcheck
+gazelle(name = "gazelle")
+
+gazelle(
+    name = "deps",
+    args = [
+        "-from_file=go.mod",
+        "-to_macro=go_deps.bzl%go_deps",
+        "-prune",
+    ],
+    command = "update-repos",
+)
+
+nogo_config(
+    name = "nogo_config",
+    out = "nogo_config.json",
+    analyzers = STATICCHECK_ANALYZERS,
+    override = STATICCHECK_OVERRIDE,
+)
+
+nogo(
+    name = "nogo",
+    config = ":nogo_config.json",
+    visibility = ["//visibility:public"],
+    deps = staticcheck_analyzers(STATICCHECK_ANALYZERS),
+)

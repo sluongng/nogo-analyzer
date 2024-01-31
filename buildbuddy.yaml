@@ -9,3 +9,15 @@ actions:
           - "*"
     bazel_commands:
       - "test --config=workflows //..."
+
+  - name: "Test example/staticcheck targets"
+    triggers:
+      push:
+        branches:
+          - "master"
+      pull_request:
+        branches:
+          - "*"
+    bazel_workspace_dir: "examples/staticcheck"
+    bazel_commands:
+      - "test --config=workflows //tests/..."
