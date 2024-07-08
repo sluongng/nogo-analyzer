@@ -3,6 +3,7 @@ filegroup(
     testonly = True,
     srcs = [
         "BUILD.bazel",
+        "//private/cmd/buildprune:all_files",
         "//private/cmd/deps-prune:all_files",
     ],
     visibility = ["//visibility:public"],

@@ -5,8 +5,8 @@ and code generation.
 --- a/pkg/golinters/BUILD.bazel
 +++ b/pkg/golinters/BUILD.bazel
 @@ -1,5 +1,11 @@
- load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-
+ load("@io_bazel_rules_go//go:def.bzl", "go_library")
+ 
 +filegroup(
 +    name = "all_go_files",
 +    srcs = glob(["*.go"]),
@@ -15,5 +15,4 @@ and code generation.
 +
  go_library(
      name = "golinters",
-     srcs = [
-exit 1
+     srcs = ["typecheck.go"],
