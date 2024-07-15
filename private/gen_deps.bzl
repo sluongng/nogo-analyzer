@@ -20,7 +20,7 @@ def generate_deps(
     # We cannot use an un-exported file target directly from within genrule
     # so let's create an alias and use the alias instead.
     native.genrule(
-        name = "gen_deps",
+        name = name + ".gen",
         outs = [_gen_file_name],
         cmd = """
             # Setup a mock bazel workspace
@@ -57,13 +57,13 @@ def generate_deps(
         **kwargs
     )
     copy_file_to_current_dir(
-        name = "write_deps",
+        name = name + ".write",
         from_target = _gen_file_name,
         to_file_name = deps_file,
     )
     native.exports_files([deps_file])
     prune_ext_deps(
-        name = "test_deps",
+        name = name + ".test",
         targets = targets,
         deps_file = deps_file,
         **kwargs

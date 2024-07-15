@@ -1,35 +1,39 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
-# gazelle:lang test_filegroup,go
-
-genrule(
-    name = "constructor",
-    outs = [
-        "constructor.go",
-    ],
-    cmd = " ".join([
-        "$(location //golangci-lint/cmd/extract-func)",
-        "$$(dirname $(locations @com_github_golangci_golangci_lint//pkg/golinters:all_go_files) | sort | uniq | head -1)",
-        "> $@",
-    ]),
-    executable = True,
-    tools = [
-        "//golangci-lint/cmd/extract-func",
-        "@com_github_golangci_golangci_lint//pkg/golinters:all_go_files",
-    ],
-)
-
 go_library(
-    name = "constructor_lib",
-    srcs = [
-        "constructor.go",  #keep
-        "placeholder.go",
-    ],
+    name = "constructor",
+    srcs = ["constructor.go"],
     importpath = "github.com/sluongng/nogo-analyzer/golangci-lint/constructor",
     visibility = ["//visibility:public"],
     deps = [
-        "@com_github_golangci_golangci_lint//pkg/golinters",
-        "@com_github_golangci_golangci_lint//pkg/golinters/goanalysis",
+        "@com_github_golangci_golangci_lint//pkg/goanalysis",
+        "@com_github_golangci_golangci_lint//pkg/golinters/asciicheck",
+        "@com_github_golangci_golangci_lint//pkg/golinters/bodyclose",
+        "@com_github_golangci_golangci_lint//pkg/golinters/canonicalheader",
+        "@com_github_golangci_golangci_lint//pkg/golinters/containedctx",
+        "@com_github_golangci_golangci_lint//pkg/golinters/contextcheck",
+        "@com_github_golangci_golangci_lint//pkg/golinters/durationcheck",
+        "@com_github_golangci_golangci_lint//pkg/golinters/err113",
+        "@com_github_golangci_golangci_lint//pkg/golinters/errname",
+        "@com_github_golangci_golangci_lint//pkg/golinters/execinquery",
+        "@com_github_golangci_golangci_lint//pkg/golinters/exportloopref",
+        "@com_github_golangci_golangci_lint//pkg/golinters/fatcontext",
+        "@com_github_golangci_golangci_lint//pkg/golinters/forcetypeassert",
+        "@com_github_golangci_golangci_lint//pkg/golinters/gocheckcompilerdirectives",
+        "@com_github_golangci_golangci_lint//pkg/golinters/gochecknoglobals",
+        "@com_github_golangci_golangci_lint//pkg/golinters/gochecknoinits",
+        "@com_github_golangci_golangci_lint//pkg/golinters/gochecksumtype",
+        "@com_github_golangci_golangci_lint//pkg/golinters/goprintffuncname",
+        "@com_github_golangci_golangci_lint//pkg/golinters/ineffassign",
+        "@com_github_golangci_golangci_lint//pkg/golinters/intrange",
+        "@com_github_golangci_golangci_lint//pkg/golinters/mirror",
+        "@com_github_golangci_golangci_lint//pkg/golinters/nilerr",
+        "@com_github_golangci_golangci_lint//pkg/golinters/noctx",
+        "@com_github_golangci_golangci_lint//pkg/golinters/nosprintfhostport",
+        "@com_github_golangci_golangci_lint//pkg/golinters/sqlclosecheck",
+        "@com_github_golangci_golangci_lint//pkg/golinters/testableexamples",
+        "@com_github_golangci_golangci_lint//pkg/golinters/tparallel",
+        "@com_github_golangci_golangci_lint//pkg/golinters/zerologlint",
     ],
 )
 
@@ -38,7 +42,7 @@ filegroup(
     testonly = True,
     srcs = [
         "BUILD.bazel",
-        "placeholder.go",
+        "constructor.go",
     ],
     visibility = ["//visibility:public"],
 )

@@ -15,15 +15,15 @@ and goanalysis.MetaLinter
 This should help enable other packages to be able to consumer
 golangci-lint analyzers for different use cases.
 ---
- pkg/golinters/goanalysis/linter.go     | 2 +-
- pkg/golinters/goanalysis/metalinter.go | 2 +-
- pkg/golinters/goanalysis/runners.go    | 8 ++++----
+ pkg/goanalysis/linter.go     | 2 +-
+ pkg/goanalysis/metalinter.go | 2 +-
+ pkg/goanalysis/runners.go    | 8 ++++----
  3 files changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/pkg/golinters/goanalysis/linter.go b/pkg/golinters/goanalysis/linter.go
-index ef49e4284a..fa1991417e 100644
---- a/pkg/golinters/goanalysis/linter.go
-+++ b/pkg/golinters/goanalysis/linter.go
+diff --git a/pkg/goanalysis/linter.go b/pkg/goanalysis/linter.go
+index 13d3a09..21dc655 100644
+--- a/pkg/goanalysis/linter.go
++++ b/pkg/goanalysis/linter.go
 @@ -168,7 +168,7 @@ func (lnt *Linter) getLinterNameForDiagnostic(*Diagnostic) string {
  	return lnt.name
  }
@@ -33,10 +33,10 @@ index ef49e4284a..fa1991417e 100644
  	return lnt.analyzers
  }
  
-diff --git a/pkg/golinters/goanalysis/metalinter.go b/pkg/golinters/goanalysis/metalinter.go
-index 5c24d10964..f6bf1153e3 100644
---- a/pkg/golinters/goanalysis/metalinter.go
-+++ b/pkg/golinters/goanalysis/metalinter.go
+diff --git a/pkg/goanalysis/metalinter.go b/pkg/goanalysis/metalinter.go
+index c2a7949..905f867 100644
+--- a/pkg/goanalysis/metalinter.go
++++ b/pkg/goanalysis/metalinter.go
 @@ -49,7 +49,7 @@ func (ml MetaLinter) getLoadMode() LoadMode {
  	return loadMode
  }
@@ -46,11 +46,11 @@ index 5c24d10964..f6bf1153e3 100644
  	var allAnalyzers []*analysis.Analyzer
  	for _, l := range ml.linters {
  		allAnalyzers = append(allAnalyzers, l.analyzers...)
-diff --git a/pkg/golinters/goanalysis/runners.go b/pkg/golinters/goanalysis/runners.go
-index 7e4cf902e7..366f3fd084 100644
---- a/pkg/golinters/goanalysis/runners.go
-+++ b/pkg/golinters/goanalysis/runners.go
-@@ -21,7 +21,7 @@ import (
+diff --git a/pkg/goanalysis/runners.go b/pkg/goanalysis/runners.go
+index c02d33b..b1b788c 100644
+--- a/pkg/goanalysis/runners.go
++++ b/pkg/goanalysis/runners.go
+@@ -23,7 +23,7 @@ import (
  type runAnalyzersConfig interface {
  	getName() string
  	getLinterNameForDiagnostic(*Diagnostic) string
@@ -59,7 +59,7 @@ index 7e4cf902e7..366f3fd084 100644
  	useOriginalPackages() bool
  	reportIssues(*linter.Context) []Issue
  	getLoadMode() LoadMode
-@@ -41,7 +41,7 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
+@@ -43,7 +43,7 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
  		pkgs = lintCtx.OriginalPackages
  	}
  
@@ -68,7 +68,7 @@ index 7e4cf902e7..366f3fd084 100644
  	var pkgsToAnalyze []*packages.Package
  	for _, pkg := range pkgs {
  		if !pkgsFromCache[pkg] {
-@@ -49,13 +49,13 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
+@@ -51,13 +51,13 @@ func runAnalyzers(cfg runAnalyzersConfig, lintCtx *linter.Context) ([]result.Iss
  		}
  	}
  
@@ -83,4 +83,4 @@ index 7e4cf902e7..366f3fd084 100644
 +			saveIssuesToCache(pkgs, pkgsFromCache, issues, lintCtx, cfg.GetAnalyzers())
  		}
  	}()
-
+ 

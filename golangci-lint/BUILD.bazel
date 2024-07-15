@@ -26,7 +26,7 @@ exports_files([
         size = "small",
         srcs = ["analyzer_test.go"],
         embed = [analyzer],
-        tags = ["manual"],
+        # tags = ["manual"],
         # Only compatible with platforms which have sandbox execution support.
         # For more information see https://github.com/bazelbuild/rules_go/issues/3144
         target_compatible_with = select({
@@ -46,8 +46,6 @@ generate_deps(
     targets = golangci_lint_analyzers(ANALYZERS, "//golangci-lint"),
 )
 
-# gazelle:lang test_filegroup
-
 filegroup(
     name = "all_files",
     testonly = True,
@@ -60,11 +58,24 @@ filegroup(
         "deps.bzl",
         "go.mod",
         "go.sum",
-        "//golangci-lint/cmd:all_files",
         "//golangci-lint/constructor:all_files",
         "//golangci-lint/patch:all_files",
         "//golangci-lint/tests:all_files",
         "//golangci-lint/util:all_files",
     ],
     visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "golangci-lint",
+    srcs = ["analyzer.go"],
+    importpath = "github.com/sluongng/nogo-analyzer/golangci-lint",
+    visibility = ["//visibility:public"],
+    deps = ["//golangci-lint/util"],
+)
+
+go_test(
+    name = "golangci-lint_test",
+    srcs = ["analyzer_test.go"],
+    embed = [":golangci-lint"],
 )

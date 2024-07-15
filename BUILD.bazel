@@ -4,12 +4,14 @@ load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 # gazelle:exclude .user.bazelrc
 # gazelle:exclude go.work.sum
 # gazelle:exclude bazel-*
+# gazelle:exclude examples/**
 
 filegroup(
     name = "all_files",
     testonly = True,
     srcs = [
         ".bazelrc",
+        ".bazelversion",
         ".gitignore",
         "BUILD.bazel",
         "LICENSE",
@@ -17,6 +19,7 @@ filegroup(
         "WORKSPACE",
         "buildbuddy.yaml",
         "def.bzl",
+        "deps.bzl",
         "go.work",
         "//.github:all_files",
         "//goci-lint:all_files",
@@ -58,10 +61,5 @@ alias(
 alias(
     name = "gobin",
     actual = "@go_sdk//:bin/go",
-    visibility = ["//visibility:public"],
-)
-
-buildifier(
-    name = "buildifier",
     visibility = ["//visibility:public"],
 )
