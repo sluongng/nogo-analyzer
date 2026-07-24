@@ -15,7 +15,7 @@ func TestMain(m *testing.M) {
 	bazel_testing.TestMain(m, bazel_testing.Args{
 		Main: `
 -- BUILD.bazel --
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
+load("@rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
 load("@com_github_sluongng_nogo_analyzer//golangci-lint:def.bzl", "golangci_lint_analyzers")
 
 nogo(
@@ -73,7 +73,7 @@ load("@com_github_sluongng_nogo_analyzer//golangci-lint:deps.bzl",  "golangci_li
 
 golangci_lint_deps()
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 

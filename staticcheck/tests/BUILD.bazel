@@ -1,13 +1,13 @@
-load("@io_bazel_rules_go//go/tools/bazel_testing:def.bzl", "go_bazel_test")
+load("@nogo-analyzer//private:go_bazel_test.bzl", "go_bazel_test")
 
 go_bazel_test(
     name = "tests",
     size = "medium",
     srcs = ["staticcheck_test.go"],
     rule_files = [
-        "@com_github_sluongng_nogo_analyzer//:all_files",
-        "@io_bazel_rules_go//:all_files",
-        "@bazel_gazelle//:all_files",
+        "@nogo-analyzer//:all_files",
+        "@rules_go//:all_files",
+        "@gazelle//:all_files",
     ],
 )
 

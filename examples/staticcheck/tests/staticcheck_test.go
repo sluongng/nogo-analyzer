@@ -15,10 +15,10 @@ func TestMain(m *testing.M) {
 	bazel_testing.TestMain(m, bazel_testing.Args{
 		Main: `
 -- BUILD.bazel --
-load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@gazelle//:def.bzl", "gazelle")
 load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers")
 load("@com_github_sluongng_nogo_analyzer//:def.bzl", "nogo_config")
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "nogo")
+load("@rules_go//go:def.bzl", "go_library", "nogo")
 
 # gazelle:prefix github.com/sluongng/nogo-analyzer/examples/staticcheck
 gazelle(name = "gazelle")
@@ -112,7 +112,7 @@ load("@com_github_sluongng_nogo_analyzer//staticcheck:deps.bzl", "staticcheck")
 
 staticcheck()
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 `,

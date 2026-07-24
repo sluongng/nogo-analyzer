@@ -31,3 +31,10 @@ http_archive(
 ```
 
 And follow instructions in specific README file of each analyzer collections.
+
+## Sync dependencies
+
+run
+```
+./tools/goworksync.sh
+```

@@ -1,0 +1,31 @@
+module(
+    name = "nogo-analyzer",
+)
+
+bazel_dep(name = "gazelle", version = "0.44.0")
+bazel_dep(name = "rules_go", version = "0.55.1")
+
+go_sdk = use_extension("@rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.download(version = "1.23.6")
+
+go_deps = use_extension("@gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(
+    go_work = "//:go.work",
+)
+go_deps.module_override(
+    patch_strip = 1,
+    patches = [
+        "//golangci-lint/patch:002_export_getter.patch",
+    ],
+    path = "github.com/golangci/golangci-lint",
+)
+use_repo(
+    go_deps,
+    "co_honnef_go_tools",
+    "com_github_golangci_gofmt",
+    "com_github_golangci_golangci_lint",
+    "com_github_golangci_prealloc",
+    "com_github_gordonklaus_ineffassign",
+    "com_github_kisielk_errcheck",
+    "org_golang_x_tools",
+)

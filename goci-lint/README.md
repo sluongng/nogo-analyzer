@@ -17,7 +17,7 @@ load("@com_github_sluongng_nogo_analyzer//goci-lint/gofmt:deps.bzl",  "gofmt_dep
 
 gofmt_deps()
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 ```

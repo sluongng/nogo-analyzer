@@ -10,6 +10,5 @@ use (
 	./goci-lint/prealloc
 	./goci-lint/tests
 	./golangci-lint
-	./private
 	./staticcheck
 )

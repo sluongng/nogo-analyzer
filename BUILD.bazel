@@ -1,5 +1,4 @@
-load("@bazel_gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
-load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@gazelle//:def.bzl", "DEFAULT_LANGUAGES", "gazelle", "gazelle_binary")
 
 # gazelle:exclude .user.bazelrc
 # gazelle:exclude go.work.sum
@@ -15,11 +14,12 @@ filegroup(
         ".gitignore",
         "BUILD.bazel",
         "LICENSE",
+        "MODULE.bazel",
+        "MODULE.bazel.lock",
         "README.md",
         "WORKSPACE",
         "buildbuddy.yaml",
         "def.bzl",
-        "deps.bzl",
         "go.work",
         "//.github:all_files",
         "//goci-lint:all_files",
@@ -33,7 +33,7 @@ filegroup(
 
 gazelle_binary(
     name = "gazelle_binary",
-    languages = DEFAULT_LANGUAGES + ["@bazel_gazelle//internal/language/test_filegroup"],
+    languages = DEFAULT_LANGUAGES + ["@gazelle//internal/language/test_filegroup"],
 )
 
 # gazelle:prefix github.com/sluongng/nogo-analyzer
@@ -42,24 +42,7 @@ gazelle(
     gazelle = "gazelle_binary",
 )
 
-gazelle(
-    name = "update-deps",
-    args = [
-        "-from_file=go.work",
-        "-to_macro=private/deps.bzl%nogo_analyzer_deps",
-        "-prune",
-    ],
-    command = "update-repos",
-    gazelle = "gazelle_binary",
-)
-
 alias(
     name = "goworksync",
-    actual = "//tools:goworksync",
-)
-
-alias(
-    name = "gobin",
-    actual = "@go_sdk//:bin/go",
-    visibility = ["//visibility:public"],
+    actual = "@nogo-analyzer//tools:goworksync",
 )

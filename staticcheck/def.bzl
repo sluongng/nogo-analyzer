@@ -162,15 +162,15 @@ ANALYZERS = [
     "U1000",
 ]
 
-def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_analyzer//staticcheck"):
+def staticcheck_analyzers(analyzers, prefix_path = "@nogo_analyzer//staticcheck"):
     """A helper function that make it easier/cleaner to declare these analyers in nogo target.
 
     Instead of:
         nogo(
             name = "nogo",
             deps = TOOLS_NOGO + [
-                "@com_github_sluongng_nogo_analyzer//staticcheck:ST1000",
-                "@com_github_sluongng_nogo_analyzer//staticcheck:ST1001",
+                "@nogo-analyzer//staticcheck:ST1000",
+                "@nogo-analyzer//staticcheck:ST1001",
             ],
             visibility = ["//visibility:public"],
         )
@@ -183,7 +183,7 @@ def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_an
         )
 
     To enable all staticcheck analyzers:
-        load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
+        load("@nogo-analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
 
         nogo(
             name = "nogo",
@@ -192,7 +192,7 @@ def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_an
         )
 
     Add the '-' prefix to remove selected analyzers from ANALYZERS:
-        load("@com_github_sluongng_nogo_analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
+        load("@nogo-analyzer//staticcheck:def.bzl", "staticcheck_analyzers", "ANALYZERS")
 
         nogo(
             name = "nogo",

@@ -13,7 +13,7 @@ func TestMain(m *testing.M) {
 	bazel_testing.TestMain(m, bazel_testing.Args{
 		Main: `
 -- BUILD.bazel --
-load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
+load("@rules_go//go:def.bzl", "go_library", "go_tool_library", "nogo")
 
 nogo(
     name = "nogo",
@@ -68,7 +68,7 @@ load("@com_github_sluongng_nogo_analyzer//goci-lint/errcheck:deps.bzl",  "errche
 
 errcheck_deps()
 
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@gazelle//:deps.bzl", "gazelle_dependencies")
 
 gazelle_dependencies()
 `,
