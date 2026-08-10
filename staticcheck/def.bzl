@@ -4,7 +4,7 @@
 #
 #   > bazel run //staticcheck/cmd/list_analyzers
 #
-ANALYZERS = [
+ALL_ANALYZERS = [
     "QF1001",
     "QF1002",
     "QF1003",
@@ -161,6 +161,9 @@ ANALYZERS = [
     "ST1023",
     "U1000",
 ]
+
+# Only analyzers that are enabled by default, per https://staticcheck.dev/docs/configuration/options/
+ANALYZERS = ALL_ANALYZERS + ["-ST1000", "-ST1003", "-ST1016", "-ST1020", "-ST1021", "-ST1022"]
 
 def staticcheck_analyzers(analyzers, prefix_path = "@com_github_sluongng_nogo_analyzer//staticcheck"):
     """A helper function that make it easier/cleaner to declare these analyers in nogo target.
