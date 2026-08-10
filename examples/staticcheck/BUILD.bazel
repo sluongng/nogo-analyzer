@@ -7,16 +7,6 @@ load(":staticcheck.bzl", "STATICCHECK_ANALYZERS", "STATICCHECK_OVERRIDE")
 # gazelle:prefix github.com/sluongng/nogo-analyzer/examples/staticcheck
 gazelle(name = "gazelle")
 
-gazelle(
-    name = "deps",
-    args = [
-        "-from_file=go.mod",
-        "-to_macro=go_deps.bzl%go_deps",
-        "-prune",
-    ],
-    command = "update-repos",
-)
-
 nogo_config(
     name = "nogo_config",
     out = "nogo_config.json",

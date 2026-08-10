@@ -1,0 +1,40 @@
+# MODULE.bazel
+
+"""
+This module sets up the Bazel dependencies and repository rules.
+"""
+
+module(name = "examples_staticcheck")
+
+bazel_dep(name = "rules_go", version = "0.54.0", repo_name = "io_bazel_rules_go")
+bazel_dep(name = "gazelle", version = "0.43.0", repo_name = "bazel_gazelle")
+
+go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.from_file(go_mod = "//:go.mod")
+go_sdk.nogo(nogo = "@//:nogo")
+
+go_deps = use_extension("@bazel_gazelle//:extensions.bzl", "go_deps")
+go_deps.from_file(go_mod = "//:go.mod")
+use_repo(go_deps, "co_honnef_go_tools", "org_golang_x_tools")
+
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "bazel_features", version = "1.29.0")
+
+# http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+#
+# http_archive(
+#     name = "com_github_sluongng_nogo_analyzer",
+#     sha256 = "a74a5e44751d292d17bd879e5aa8b40baa94b5dc2f043df1e3acbb3e23ead073",
+#     strip_prefix = "nogo-analyzer-0.0.2",
+#     urls = [
+#         "https://github.com/sluongng/nogo-analyzer/archive/refs/tags/v0.0.2.tar.gz",
+#     ],
+# )
+
+# for dev usage only, see an example above for external usage.
+local_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:local.bzl", "local_repository")
+
+local_repository(
+    name = "com_github_sluongng_nogo_analyzer",
+    path = "../..",
+)
